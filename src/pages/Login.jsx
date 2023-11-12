@@ -1,163 +1,93 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import styled from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
-import Logo from "../assets/logo.svg";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import { LoginSocialGoogle } from 'reactjs-social-login'
+import { GoogleLoginButton } from 'react-social-login-buttons'
+
+
 import "react-toastify/dist/ReactToastify.css";
-import { loginRoute } from "../utils/APIRoutes";
+import '../assets/css/authStyle.css';
+
+import { login } from "../redux/actions/authActions";
+
+const REACT_APP_GG_APP_ID = '65679218423-r4jlmm8apk41itpck18igdc5g6nba64u.apps.googleusercontent.com'
 
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [values, setValues] = useState({ username: "", password: "" });
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const token = useSelector(state => state.authReducer.token);
+  const message = useSelector(state => state.authReducer.message);
+  const data = useSelector(state => state.authReducer.data)
+
+  // Login and set token
+  const submitForm = useCallback((email, password) => {
+    dispatch(login(email, password));
+    // sessionStorage.setItem("token", token)
+  })
+
+  // Navigate to chat box when user have token
   useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-      navigate("/");
-    }
-  }, []);
+    // if (sessionStorage.getItem("token")) {
+    //   setTimeout(() => {
+    //     navigate('/');
+    //   })
+    // }
+  })
 
-  const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
+  // Display message
+  useEffect(() => {
+    toast(message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }, [data])
 
-  const validateForm = () => {
-    const { username, password } = values;
-    if (username === "") {
-      toast.error("Email and Password is required.", toastOptions);
-      return false;
-    } else if (password === "") {
-      toast.error("Email and Password is required.", toastOptions);
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (validateForm()) {
-      const { username, password } = values;
-      const { data } = await axios.post(loginRoute, {
-        username,
-        password,
-      });
-      if (data.status === false) {
-        toast.error(data.msg, toastOptions);
-      }
-      if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
-
-        navigate("/");
-      }
-    }
-  };
 
   return (
     <>
-      <FormContainer>
-        <form action="" onSubmit={(event) => handleSubmit(event)}>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>snappy</h1>
-          </div>
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={(e) => handleChange(e)}
-            min="3"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={(e) => handleChange(e)}
-          />
-          <button type="submit">Log In</button>
-          <span>
-            Don't have an account ? <Link to="/register">Create One.</Link>
-          </span>
-        </form>
-      </FormContainer>
       <ToastContainer />
+      <div className="content">
+        <div className="flex-div">
+          <div className="name-content">
+            <h1 className="logo">WinD</h1>
+            <p>Connect with friends and the world around you on Facebook.</p>
+          </div>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            submitForm(email, password);
+          }}>
+            <input type="text" placeholder="Email or Phone Number" required={true} onChange={e => setEmail(e.target.value)} />
+            <input type="password" placeholder="Password" required={true} onChange={e => setPassword(e.target.value)} />
+            <input type="submit" value="Log in" className="login" />
+            <LoginSocialGoogle
+              scope={'email'}
+              client_id={REACT_APP_GG_APP_ID || ''}
+              onResolve={({ provider, data }) => {
+                console.log(data)
+                // sessionStorage.setItem('email',JSON.stringify(data));
+                // dispatch(loginWithEmail(data.email))
+              }}
+              onReject={(err) => {
+              }}
+            >
+              <GoogleLoginButton style={{ fontSize: '16px', width: '275px', margin: '0px' }} />
+            </LoginSocialGoogle>
+            <a href="#">Forgot Password ?</a>
+            <hr />
+            <Link className="create-account" to="/register">Create New Account</Link>
+          </form>
+        </div>
+      </div>
     </>
-  );
+  )
+
 }
-
-const FormContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  background-color: #131324;
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 5rem;
-    }
-    h1 {
-      color: white;
-      text-transform: uppercase;
-    }
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: #00000076;
-    border-radius: 2rem;
-    padding: 5rem;
-  }
-  input {
-    background-color: transparent;
-    padding: 1rem;
-    border: 0.1rem solid #4e0eff;
-    border-radius: 0.4rem;
-    color: white;
-    width: 100%;
-    font-size: 1rem;
-    &:focus {
-      border: 0.1rem solid #997af0;
-      outline: none;
-    }
-  }
-  button {
-    background-color: #4e0eff;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    &:hover {
-      background-color: #4e0eff;
-    }
-  }
-  span {
-    color: white;
-    text-transform: uppercase;
-    a {
-      color: #4e0eff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
-`;
