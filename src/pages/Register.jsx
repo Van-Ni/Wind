@@ -11,11 +11,14 @@ import '../assets/css/authStyle.css';
 export default function Register() {
   const navigate = useNavigate();
   const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
-    theme: "dark",
+    progress: undefined,
+    theme: "light",
   };
   const [values, setValues] = useState({
     username: "",
@@ -85,69 +88,32 @@ export default function Register() {
     }
   };
 
-  return (
-    <>
-      <FormContainer>
-        <form action="" onSubmit={(event) => handleSubmit(event)}>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>snappy</h1>
-          </div>
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={(e) => handleChange(e)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            onChange={(e) => handleChange(e)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={(e) => handleChange(e)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="confirmPassword"
-            onChange={(e) => handleChange(e)}
-          />
-          <button type="submit">Create User</button>
-          <span>
-            Already have an account ? <Link to="/login">Login.</Link>
-          </span>
-        </form>
-      </FormContainer>
-      <ToastContainer />
-    </>
-  );
+ 
 
   return (
     <>
+      
       <div className="content">
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>
             <p>Connect with friends and the world around you on Facebook.</p>
           </div>
-          <form>
-            <input type="text" placeholder="Email or Phone Number" required="true" />
-            <input type="text" placeholder="Fullname" required="true" />
-            <input type="password" placeholder="Password" required="true" />
-            <input type="repassword" placeholder="Enter Password Again" required="true" />
-            <button className="login">Sign up</button>
+          <form action="" onSubmit={(event) => handleSubmit(event)}>
+            <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Email or Phone Number" required="true" />
+            <input type="text" name="username" onChange={(e) => handleChange(e)} placeholder="Fullname" required="true" />
+            <input type="password" name="password" onChange={(e) => handleChange(e)} placeholder="Password" required="true" />
+            <input type="password" name="confirmPassword" onChange={(e) => handleChange(e)} placeholder="Enter Password Again" required="true" />
+            <button type="submit" className="login">Sign up</button>
             <hr />
             <Link to='/login'>Already have account? Login now</Link>
           </form>
         </div>
       </div>
+      
+      <ToastContainer />
     </>
-  )
+  );
 }
 
 const FormContainer = styled.div`
