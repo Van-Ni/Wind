@@ -27,10 +27,12 @@ const Container = styled.div`
   align-items: center;
   color: white;
   flex-direction: column;
+  font-size: 2.2rem;
   img {
     height: 20rem;
   }
   span {
     color: #4e0eff;
+    font-size: 2.2rem;
   }
 `;

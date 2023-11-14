@@ -90,9 +90,8 @@ export default function ChatContainer({ currentChat, socket }) {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
+                className={`message ${message.fromSelf ? "sended" : "recieved"
+                  }`}
               >
                 <div className="content ">
                   <p>{message.message}</p>
@@ -108,7 +107,9 @@ export default function ChatContainer({ currentChat, socket }) {
 }
 
 const Container = styled.div`
-  display: grid;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
   grid-template-rows: 10% 80% 10%;
   gap: 0.1rem;
   overflow: hidden;
@@ -116,6 +117,7 @@ const Container = styled.div`
     grid-template-rows: 15% 70% 15%;
   }
   .chat-header {
+    background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -131,12 +133,15 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: white;
+          color: #000;
+          font-size: 1.6rem;
         }
       }
     }
   }
   .chat-messages {
+    background-color: #fff;
+    height: 100%;
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
