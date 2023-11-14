@@ -29,12 +29,12 @@ body {
 }
 
 .name-content .logo {
-    font-size: 3.5rem;
+    font-size: 7rem;
     color: #1877f2;
 }
 
 .name-content p {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: 500;
     margin-bottom: 5rem;
 }
@@ -54,7 +54,7 @@ form input {
     outline: none;
     padding: 0.8rem 1rem;
     margin-bottom: 0.8rem;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
 }
 
 form input:focus {
@@ -67,7 +67,7 @@ form .login {
     background: #1877f2;
     padding: 0.8rem 1rem;
     border-radius: 0.4rem;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     color: #fff;
 }
 
@@ -79,7 +79,7 @@ form .login:hover {
 form a {
     text-decoration: none;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.4rem;
     padding-top: 0.8rem;
     color: #1877f2;
 }
@@ -95,7 +95,7 @@ form .create-account {
     background: #06b909;
     padding: 0.8rem 1rem;
     border-radius: 0.4rem;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     color: #fff;
     width: 75%;
     margin: 0 auto;

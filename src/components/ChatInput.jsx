@@ -52,7 +52,7 @@ const Container = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 5% 95%;
-  background-color: #080420;
+  background-color: #fff;
   padding: 0 2rem;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
@@ -61,26 +61,26 @@ const Container = styled.div`
   .button-container {
     display: flex;
     align-items: center;
-    color: white;
+    color: #000;
     gap: 1rem;
     .emoji {
       position: relative;
       svg {
-        font-size: 1.5rem;
-        color: #ffff00c8;
+        font-size: 2.2rem;
+        color: #ccc;
         cursor: pointer;
       }
       .emoji-picker-react {
         position: absolute;
         top: -350px;
-        background-color: #080420;
+        background-color: #fff;
         box-shadow: 0 5px 10px #9a86f3;
-        border-color: #9a86f3;
+        border-color: #fff;
         .emoji-scroll-wrapper::-webkit-scrollbar {
-          background-color: #080420;
+          background-color: #0091ff;
           width: 5px;
           &-thumb {
-            background-color: #9a86f3;
+            background-color: #fff;
           }
         }
         .emoji-categories {
@@ -90,10 +90,10 @@ const Container = styled.div`
         }
         .emoji-search {
           background-color: transparent;
-          border-color: #9a86f3;
+          border-color: #0091ff;
         }
         .emoji-group:before {
-          background-color: #080420;
+          background-color: #fff;
         }
       }
     }
@@ -102,6 +102,8 @@ const Container = styled.div`
     width: 100%;
     border-radius: 2rem;
     display: flex;
+    flex-direction:row;
+    height: 30px;
     align-items: center;
     gap: 2rem;
     background-color: #ffffff34;
@@ -109,10 +111,10 @@ const Container = styled.div`
       width: 90%;
       height: 60%;
       background-color: transparent;
-      color: white;
+      color: #000;
       border: none;
       padding-left: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.6rem;
 
       &::selection {
         background-color: #9a86f3;
