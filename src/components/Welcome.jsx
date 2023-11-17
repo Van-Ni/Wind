@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Robot from "../assets/robot.gif";
 export default function Welcome() {
   const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState(undefined);
+
   useEffect(async () => {
     setUserName(
       await JSON.parse(
@@ -10,11 +12,18 @@ export default function Welcome() {
       ).username
     );
   }, []);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("email")) {
+      setUserEmail(sessionStorage.getItem("email"))
+    } 
+  }, [])
+
   return (
     <Container>
       <img src={Robot} alt="" />
       <h1>
-        Welcome, <span>{userName}!</span>
+        Welcome, <span>{userEmail}!</span>
       </h1>
       <h3>Please select a chat to Start messaging.</h3>
     </Container>

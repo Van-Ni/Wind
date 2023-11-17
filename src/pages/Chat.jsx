@@ -14,6 +14,7 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [userEmail, setUserEmail] = useState(undefined);
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
@@ -21,6 +22,8 @@ export default function Chat() {
       })
     }
   }, [sessionStorage.getItem("token")]);
+
+  
 
   useEffect(() => {
     if (currentUser) {
