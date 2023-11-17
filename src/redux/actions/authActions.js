@@ -62,32 +62,32 @@ export const loginWithEmail = (email) => {
     }
 };
 
-// export const register = (firstname, lastname, email, password) => {
-//     // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
-//     // Trả về một action có type và payload tương ứng
-//     return (dispatch) => {
-//         fetch("https://wind-be.onrender.com/auth/register", {
-//             method: "POST",
-//             body: JSON.stringify({
-//                 firstName: firstname,
-//                 lastname: lastname,
-//                 email: email,
-//                 password: password,
-//             }),
+export const register = (firstname, lastname, email, password) => {
+    // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
+    // Trả về một action có type và payload tương ứng
+    return (dispatch) => {
+        fetch("https://wind-be.onrender.com/auth/register", {
+            method: "POST",
+            body: JSON.stringify({
+                firstName: firstname,
+                lastname: lastname,
+                email: email,
+                password: password,
+            }),
 
-//             headers: {
-//                 "Content-type": "application/json; charset=UTF-8",
-//             },
-//         })
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 dispatch({
-//                     type: "ADD",
-//                     payload: {
-//                         message: "Add room success!",
-//                     },
-//                 });
-//             })
-//             .catch((err) => { });
-//     }
-// };
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch({
+                    type: "ADD",
+                    payload: {
+                        message: "Add room success!",
+                    },
+                });
+            })
+            .catch((err) => { });
+    }
+};
