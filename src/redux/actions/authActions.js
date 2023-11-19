@@ -22,7 +22,6 @@ export const login = (email, password) => {
                         status: data.status,
                         token: data.token,
                         message: data.message,
-                        data: data
                     },
                 });
             })

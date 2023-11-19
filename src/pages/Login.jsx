@@ -20,12 +20,12 @@ export default function Login() {
   const [password, setPassword] = useState();
   const token = useSelector(state => state.authReducer.token);
   const message = useSelector(state => state.authReducer.message);
-  const data = useSelector(state => state.authReducer.data)
 
   // Login and set token
   const submitForm = useCallback((email, password) => {
     dispatch(login(email, password));
-    sessionStorage.setItem("token", token)
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("email", email);
   })
 
   // Navigate to chat box when user have token

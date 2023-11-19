@@ -10,6 +10,15 @@ import '../assets/css/authStyle.css';
 
 export default function Register() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      setTimeout(() => {
+        navigate('/');
+      })
+    }
+  }, [sessionStorage.getItem("token")])
+  
   const toastOptions = {
     position: "top-center",
     autoClose: 3000,
@@ -87,9 +96,7 @@ export default function Register() {
       }
     }
   };
-
- 
-
+  
   return (
     <>
       
