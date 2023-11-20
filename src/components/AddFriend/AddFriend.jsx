@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./style.css";
-import IconRq from "../assets/frrq-icon.jpg";
-import IconAll from "../assets/allicon.jpg";
-import Iconsugesst from "../assets/suggesticon.jpg";
-import Homebutton from "../assets/home.jpg";
-import FriendIcon from "../assets/userbutton.jpg";
-import MsgIcon from "../assets/msg.jpg";
-import NofiIcon from "../assets/nofi.jpg";
-import MenuIcon from "../assets/menu.jpg";
-import AvtIcon from "../assets/avt.jpg";
+import IconRq from "../../assets/img/frrq-icon.jpg";
+import IconAll from "../../assets/img/allicon.jpg";
+import Iconsugesst from "../../assets/img/suggesticon.jpg";
+import Homebutton from "../../assets/img/home.jpg";
+import FriendIcon from "../../assets/img/userbutton.jpg";
+import MsgIcon from "../../assets/img/msg.jpg";
+import NofiIcon from "../../assets/img/nofi.jpg";
+import MenuIcon from "../../assets/img/menu.jpg";
+import AvtIcon from "../../assets/img/avt.jpg";
 
 function AddFriend() {
   const [friends, setFriends] = useState([]);
@@ -22,7 +22,7 @@ function AddFriend() {
   };
 
   return (
-    <div className="container">
+    <div id="addfriend-container" className="container">
       <div className="top-menu">
         <div className="logo-icon">
           <a className="text-icon">

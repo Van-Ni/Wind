@@ -1,13 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
 import { LoginSocialGoogle } from 'reactjs-social-login'
 import { GoogleLoginButton } from 'react-social-login-buttons'
 
-
-import "react-toastify/dist/ReactToastify.css";
-import '../assets/css/authStyle.css';
+import '../assets/css/loginStyle.css';
 
 import { login } from "../redux/actions/authActions";
 
@@ -39,7 +36,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="content">
+      <div id="login-container" className="content">
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>
@@ -63,7 +60,7 @@ export default function Login() {
               onReject={(err) => {
               }}
             >
-              <GoogleLoginButton style={{ fontSize: '3.6rem', width: '345px', margin: '0px' }} />
+              <GoogleLoginButton style={{ fontSize: '16px', width: '345px', margin: '0px' }} />
             </LoginSocialGoogle>
             <a href="#">Forgot Password ?</a>
             <hr />

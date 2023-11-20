@@ -69,11 +69,11 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: rgb(229, 239, 255);;
   .container {
     height: 85vh;
     width: 85vw;
-    background-color: #0091ff;
+    background-color: #3b71ca;
     display: grid;
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {

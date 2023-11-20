@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../assets/logo.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
-import '../assets/css/authStyle.css';
+import '../assets/css/registerStyle.css';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -100,7 +99,7 @@ export default function Register() {
   return (
     <>
       
-      <div className="content">
+      <div id="register-container" className="content">
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>

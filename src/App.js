@@ -7,8 +7,7 @@ import SetAvatar from "./components/SetAvatar";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AddFriend from "./AddFriend/AddFriend";
-
+import AddFriend from "./components/AddFriend/AddFriend"
 export default function App() {
   return (
     <Provider store={store}>

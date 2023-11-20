@@ -1,45 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-* {
+#register-container.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: "Poppins", sans-serif;
-    background: #f2f4f7;
-}
-
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.flex-div {
+#register-container .flex-div {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.name-content {
+#register-container .name-content {
     margin-right: 7rem;
 }
 
-.name-content .logo {
-    font-size: 7rem;
+#register-container .name-content .logo {
+    font-size: 60px;
     color: #1877f2;
 }
 
-.name-content p {
-    font-size: 1.6rem;
+#register-container .name-content p {
+    font-size: 16px;
     font-weight: 500;
     margin-bottom: 5rem;
 }
 
-form {
+#register-container form {
     display: flex;
     flex-direction: column;
     background: #fff;
@@ -50,65 +42,64 @@ form {
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 
-form input {
+#register-container form input {
     outline: none;
     padding: 0.8rem 1rem;
     margin-bottom: 0.8rem;
-    font-size: 1.6rem;
+    font-size: 16px;
 }
 
-form input:focus {
+#register-container form input:focus {
     border: 1.8px solid #1877f2;
 }
 
-form .login {
+#register-container form .login {
     outline: none;
     border: none;
     background: #1877f2;
     padding: 0.8rem 1rem;
     border-radius: 0.4rem;
-    font-size: 1.6rem;
+    font-size: 16px;
     color: #fff;
 }
 
-form .login:hover {
+#register-container form .login:hover {
     background: #0f71f1;
     cursor: pointer;
 }
 
-form a {
+#register-container form a {
     text-decoration: none;
     text-align: center;
-    font-size: 1.4rem;
-    padding-top: 0.8rem;
+    font-size: 14px;
     color: #1877f2;
 }
 
-form hr {
+#register-container form hr {
     background: #f7f7f7;
     margin: 1rem;
 }
 
-form .create-account {
+#register-container form .create-account {
     outline: none;
     border: none;
     background: #06b909;
     padding: 0.8rem 1rem;
     border-radius: 0.4rem;
-    font-size: 1.6rem;
+    font-size: 16px;
     color: #fff;
     width: 75%;
     margin: 0 auto;
 }
 
-form .create-account:hover {
+#register-container form .create-account:hover {
     background: #03ad06;
     cursor: pointer;
 }
 
 /* //.........Media Query.........// */
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
     html {
         font-size: 60%;
     }
@@ -226,4 +217,4 @@ form .create-account:hover {
             height: 90vmax;
         }
     }
-}
+} */

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/img/logo.svg";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -104,7 +104,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 3rem;
+    font-size: 22px;
     justify-content: center;
     img {
       height: 2rem;
@@ -131,11 +131,11 @@ const Container = styled.div`
     }
     .contact {
       background-color: #fff;
-      min-height: 5rem;
+      min-height: 55px;
       cursor: pointer;
       width: 90%;
       border-radius: 0.2rem;
-      padding: 0.4rem;
+      padding: 4px;
       display: flex;
       gap: 1rem;
       align-items: center;
@@ -148,7 +148,7 @@ const Container = styled.div`
       .username {
         h3 {
           color: #000;
-          font-size: 1.6rem;
+          font-size: 16px;
         }
       }
     }
@@ -158,7 +158,7 @@ const Container = styled.div`
   }
 
   .current-user {
-    background-color: #0091ff;
+    background-color: #3b71ca;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,14 +172,14 @@ const Container = styled.div`
     .username {
       h2 {
         color: white;
-        font-size: 1.6rem;
+        font-size: 16px;
       }
     }
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       gap: 0.5rem;
       .username {
         h2 {
-          font-size: 1rem;
+          font-size: 10px;
         }
       }
     }
