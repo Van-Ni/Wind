@@ -62,7 +62,7 @@ function AddFriend() {
       fetch("https://wind-be.onrender.com/user/get-requests", {
         method: "GET",
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5Y2IxNzk0ZTI2NDNhNjA3YjY1MzQiLCJpYXQiOjE3MDA0NzI5NDMsImV4cCI6MTcwMDU1OTM0M30.JFlmf3nnRzyNEuMZL5TjIpm7vDUv8arsKIiA6LyVhsc`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
