@@ -8,7 +8,7 @@ export default function Logout() {
   const navigate = useNavigate();
   const handleLogout = () => {
     sessionStorage.removeItem("token");
-    navigate('/login');
+    window.location.reload()
   };
   return (
     <Button onClick={handleLogout}>

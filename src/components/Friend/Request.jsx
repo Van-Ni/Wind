@@ -62,8 +62,8 @@ function Request() {
       fetch("https://wind-be.onrender.com/user/get-requests", {
         method: "GET",
         headers: {
-          // Authorization: `Bearer ${token}`,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5Y2IxNzk0ZTI2NDNhNjA3YjY1MzQiLCJpYXQiOjE3MDA0OTE4MDUsImV4cCI6MTcwMDU3ODIwNX0.jbwW5PEE-XXcScRK1I_bA37PWuC2Wb2uOqterTBIV7g`,
+          Authorization: `Bearer ${token}`,
+         
           "Content-Type": "application/json",
         },
       })

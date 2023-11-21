@@ -15,15 +15,14 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userEmail, setUserEmail] = useState(undefined);
+  
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
         navigate('/login');
       })
     }
-  }, [sessionStorage.getItem("token")]);
-
-  console.log(sessionStorage.getItem("token"));
+  }, [navigate]);
 
   useEffect(() => {
     if (currentUser) {
