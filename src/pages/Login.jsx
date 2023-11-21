@@ -19,20 +19,25 @@ export default function Login() {
   const message = useSelector(state => state.authReducer.message);
 
   // Login and set token
-  const submitForm = useCallback((email, password) => {
+  const submitForm = useCallback((e) => {
+    e.preventDefault();
     dispatch(login(email, password));
-    sessionStorage.setItem("token", token);
     sessionStorage.setItem("email", email);
-  })
+  }, [dispatch, email, password]);
 
   // Navigate to chat box when user have token
   useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      setTimeout(() => {
-        navigate('/');
-      })
+    if (token) {
+      sessionStorage.setItem("token", token);
+      navigate("/");
     }
-  }, [sessionStorage.getItem("token")])
+  }, [token, navigate])
+
+  // Auto navigate to chat when token is exist in session
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) 
+      navigate("/");
+  }, [navigate])
 
   return (
     <>
@@ -40,12 +45,9 @@ export default function Login() {
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>
-            <p>Connect with friends and the world around you on Facebook.</p>
+            <p>Connect with friends and the world around you on WinD.</p>
           </div>
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            submitForm(email, password);
-          }}>
+          <form onSubmit={submitForm}>
             <input type="text" placeholder="Email or Phone Number" required={true} onChange={e => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" required={true} onChange={e => setPassword(e.target.value)} />
             <input type="submit" value="Log in" className="login" />
