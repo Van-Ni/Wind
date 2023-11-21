@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import IconRq from "../../assets/img/frrq-icon.jpg";
+import IconRq from "../../assets/img/frreqindex.jpg";
 import IconAll from "../../assets/img/allicon.jpg";
-import Iconsugesst from "../../assets/img/suggesticon.jpg";
+import Iconsugesst from "../../assets/img/suggestindex.jpg";
 import Homebutton from "../../assets/img/home.jpg";
 import FriendIcon from "../../assets/img/userbutton.jpg";
 import MsgIcon from "../../assets/img/msg.jpg";
@@ -12,7 +12,7 @@ import MenuIcon from "../../assets/img/menu.jpg";
 import AvtIcon from "../../assets/img/avt.jpg";
 import DefaultAvt from "../../assets/img/default.jpg"
 
-function AddFriend() {
+function Suggest() {
   const navigate = useNavigate();
 
   const [friendrequest, setFriendrequest] = useState([]);
@@ -40,7 +40,7 @@ function AddFriend() {
     const endIndex = startIndex + productsPerPage;
     return friendrequest.slice(startIndex, endIndex);
   }, [friendrequest]);
- 
+  console.log("a"+displayedFRRS)
 
 
 
@@ -59,19 +59,17 @@ function AddFriend() {
         navigate("/login");
       });
     } else {
-      fetch("https://wind-be.onrender.com/user/get-requests", {
+      fetch("https://wind-be.onrender.com/user/get-users", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          // Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5Y2IxNzk0ZTI2NDNhNjA3YjY1MzQiLCJpYXQiOjE3MDA0OTE4MDUsImV4cCI6MTcwMDU3ODIwNX0.jbwW5PEE-XXcScRK1I_bA37PWuC2Wb2uOqterTBIV7g`,
           "Content-Type": "application/json",
         },
       })
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 'success' && data.data.length > 0) {
-            const { sender } = data.data[0];
-            const { firstName, lastName, _id } = sender;
-         
             // Update state or do other actions with the data
             setFriendrequest(data.data);
           } else {
@@ -82,7 +80,7 @@ function AddFriend() {
     }
   }, []);
 
-
+  console.log(friendrequest)
 
   const { firstName, lastName, _id } = displayedFRRS[0]?.sender || {};
   
@@ -102,7 +100,7 @@ function AddFriend() {
           <a href="./" className="home-button">
             <img className="img-icon" src={Homebutton} alt="logo" />
           </a>
-          <a href="./addfriend" className="home-button">
+          <a href="./" className="home-button">
             <img className="img-icon" src={FriendIcon} alt="logo" />
           </a>
         </div>
@@ -139,21 +137,21 @@ function AddFriend() {
         <ul>
           <li>
             <img className="img-icon" src={IconRq} alt="logo" />
-            Friend Request
+            <a href="./request">Friend Request</a> 
           </li>
           <li>
             <img className="img-icon" src={Iconsugesst} alt="logo" />
-            <a href="./">Suggest</a>
+            <a >Suggest</a>
           </li>
           <li>
             <img className="img-icon" src={IconAll} alt="logo" />
-            All Friends
+            <a href="./"> All Friends</a>
           </li>
         </ul>
       </div>
 
       <div className="content">
-        <h1 className="text-frrq">Friend Request </h1>
+        <h1 className="text-frrq">Friend Suggest </h1>
         {/* <div className="ui grid container">
         {displayedProducts.map((friendrequest) => {
           const { id, firstName  , lastName} =
@@ -178,12 +176,15 @@ function AddFriend() {
           );
         })}
       </div> */}
-        <div className="container-card">
-    {displayedFRRS.map((request, index) => {
-      const { sender } = request;
-      const { firstName, lastName, _id } = sender;
+ <div className="container-card">
+  {displayedFRRS.map((request, index) => {
+    // Kiểm tra xem request và sender có tồn tại không
+    if (request ) {
+     
+      const { firstName, lastName, _id } = request;
 
       return (
+        <div className="four-wide-column" key={_id}>
         <div className="card" key={index}>
           <div className="image">
             <img className="image" src={DefaultAvt} alt={`Avatar_${_id}`} />
@@ -194,13 +195,19 @@ function AddFriend() {
             <button>Delete</button>
           </div>
         </div>
+        </div>
       );
-    })}
-    </div>
+    } else {
+      // Trả về một phần tử trống nếu dữ liệu không hợp lệ
+      return null;
+    }
+  })}
+</div>
       </div>
     </div>
     </>
   );
 }
 
-export default AddFriend;
+export default Suggest;
+

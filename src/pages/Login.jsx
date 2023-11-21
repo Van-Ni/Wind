@@ -22,8 +22,11 @@ export default function Login() {
   const submitForm = useCallback((email, password) => {
     dispatch(login(email, password));
     sessionStorage.setItem("token", token);
+    
     sessionStorage.setItem("email", email);
+    console.log("token" + token)
   })
+  
 
   // Navigate to chat box when user have token
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function Login() {
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>
-            <p>Connect with friends and the world around you on Facebook.</p>
+            <p>Connect with friends and the world around you on WinD.</p>
           </div>
           <form onSubmit={(e) => {
             e.preventDefault();

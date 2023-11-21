@@ -23,7 +23,7 @@ export default function Chat() {
     }
   }, [sessionStorage.getItem("token")]);
 
-  
+  console.log(sessionStorage.getItem("token"));
 
   useEffect(() => {
     if (currentUser) {
