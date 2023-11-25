@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-
+#profiles-container
 .personal-info-container {
     display: flex;
     flex-direction: column;
@@ -7,27 +7,31 @@
     margin-top: 20px;
   }
   
-  .personal-info-title {
+ #profiles-container .personal-info-title {
     text-align: center;
     margin-bottom: 20px;
   }
   
-  .info-row {
+ #profiles-container .info-row  {
     display: flex;
-    align-items: center;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
     margin-bottom: 10px;
   }
   
-  .info-label {
+ #profiles-container .info-label {
     width: 100px;
+    display: flex;
+    justify-content: flex-start !important;
+    margin-bottom: 10px;
   }
   
-  .info-value {
+ #profiles-container .info-value {
     flex: 1;
     border: none;
   }
 
-  .tag-title {
+ #profiles-container .tag-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,13 +39,13 @@
     font-size: 20px;
   }
   
-  .update-button {
-    width: 320px;
-    height: 35px;
+ #profiles-container .update-button {
+    height: 30px;
+    width: 90%;
     margin-top: 10px;
     background-color: #1877f2;
     border-radius: 5px;
-    color: #fff;
+    color: #fff; 
   }
 
 
@@ -49,18 +53,18 @@ body {
 	background-color: #f5f7fa;
 }
 
-.testimonial-card .card-up {
+#profiles-container .testimonial-card .card-up {
   height: 120px;
   overflow: hidden;
   border-top-left-radius: .25rem;
   border-top-right-radius: .25rem;
 }
 
-.aqua-gradient {
+#profiles-container .aqua-gradient {
   background: linear-gradient(40deg, #2096ff, #523ad9) !important;
 }
 
-.testimonial-card .avatar {
+#profiles-container .testimonial-card .avatar {
   width: 120px;
   margin-top: -60px;
   overflow: hidden;

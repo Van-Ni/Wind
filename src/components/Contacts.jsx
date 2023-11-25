@@ -6,17 +6,26 @@ export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
+  const [userEmail, setUserEmail] = useState(undefined);
+
   useEffect(async () => {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
     const storedData = {
-      username: "John Doe",
+      username: userEmail,
       avatarImage: "dummy-avatar-image"
     };
     setCurrentUserName(storedData.username);
     setCurrentUserImage(storedData.avatarImage);
-  }, []);
+  }, [userEmail]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("email")) {
+      setUserEmail(sessionStorage.getItem("email"))
+    } 
+  }, [])
+
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
@@ -44,8 +53,8 @@ export default function Contacts({ contacts, changeChat }) {
       {currentUserImage && currentUserImage && (
         <Container>
           <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h3>snappy</h3>
+            {/* <img src={Logo} alt="logo" /> */}
+            <h3>Wind</h3>
           </div>
           <div className="contacts">
             {Contacts.map((contact, index) => {
@@ -70,12 +79,12 @@ export default function Contacts({ contacts, changeChat }) {
             })}
           </div>
           <div className="current-user">
-            <div className="avatar">
+            {/* <div className="avatar">
               <img
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
                 alt="avatar"
               />
-            </div>
+            </div> */}
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
@@ -89,19 +98,22 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
-  background-color: #080420;
+  background-color: #fff;
+  border-right: 1px solid #ccc;
   .brand {
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-size: 3rem;
     justify-content: center;
     img {
       height: 2rem;
     }
     h3 {
-      color: white;
+      color: black;
       text-transform: uppercase;
     }
+    border-bottom: 1px solid #ccc;
   }
   .contacts {
     display: flex;
@@ -118,7 +130,7 @@ const Container = styled.div`
       }
     }
     .contact {
-      background-color: #ffffff34;
+      background-color: #fff;
       min-height: 5rem;
       cursor: pointer;
       width: 90%;
@@ -135,17 +147,18 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: white;
+          color: #000;
+          font-size: 1.6rem;
         }
       }
     }
     .selected {
-      background-color: #9a86f3;
+      background-color: #e5efff;
     }
   }
 
   .current-user {
-    background-color: #0d0d30;
+    background-color: #0091ff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -159,6 +172,7 @@ const Container = styled.div`
     .username {
       h2 {
         color: white;
+        font-size: 1.6rem;
       }
     }
     @media screen and (min-width: 720px) and (max-width: 1080px) {

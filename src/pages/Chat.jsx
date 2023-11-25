@@ -14,17 +14,17 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
-  // useEffect(async () => {
-  //   if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-  //     navigate("/login");
-  //   } else {
-  //     setCurrentUser(
-  //       await JSON.parse(
-  //         localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-  //       )
-  //     );
-  //   }
-  // }, []);
+  const [userEmail, setUserEmail] = useState(undefined);
+  useEffect(() => {
+    if (!sessionStorage.getItem("token")) {
+      setTimeout(() => {
+        navigate('/login');
+      })
+    }
+  }, [sessionStorage.getItem("token")]);
+
+  
+
   useEffect(() => {
     if (currentUser) {
       socket.current = io(host);
@@ -73,7 +73,7 @@ const Container = styled.div`
   .container {
     height: 85vh;
     width: 85vw;
-    background-color: #00000076;
+    background-color: #0091ff;
     display: grid;
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {

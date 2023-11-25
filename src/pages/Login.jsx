@@ -20,41 +20,25 @@ export default function Login() {
   const [password, setPassword] = useState();
   const token = useSelector(state => state.authReducer.token);
   const message = useSelector(state => state.authReducer.message);
-  const data = useSelector(state => state.authReducer.data)
 
   // Login and set token
   const submitForm = useCallback((email, password) => {
     dispatch(login(email, password));
-    // sessionStorage.setItem("token", token)
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("email", email);
   })
 
   // Navigate to chat box when user have token
   useEffect(() => {
-    // if (sessionStorage.getItem("token")) {
-    //   setTimeout(() => {
-    //     navigate('/');
-    //   })
-    // }
-  })
-
-  // Display message
-  useEffect(() => {
-    toast(message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }, [data])
-
+    if (sessionStorage.getItem("token")) {
+      setTimeout(() => {
+        navigate('/');
+      })
+    }
+  }, [sessionStorage.getItem("token")])
 
   return (
     <>
-      <ToastContainer />
       <div className="content">
         <div className="flex-div">
           <div className="name-content">
@@ -79,7 +63,7 @@ export default function Login() {
               onReject={(err) => {
               }}
             >
-              <GoogleLoginButton style={{ fontSize: '16px', width: '275px', margin: '0px' }} />
+              <GoogleLoginButton style={{ fontSize: '3.6rem', width: '345px', margin: '0px' }} />
             </LoginSocialGoogle>
             <a href="#">Forgot Password ?</a>
             <hr />
