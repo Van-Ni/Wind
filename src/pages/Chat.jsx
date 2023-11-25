@@ -21,26 +21,31 @@ export default function Chat() {
       setTimeout(() => {
         navigate('/login');
       })
+    } else {
+      setCurrentUser(sessionStorage.getItem("email"));
     }
   }, [navigate]);
 
   useEffect(() => {
     if (currentUser) {
-      socket.current = io(host);
-      socket.current.emit("add-user", currentUser._id);
+      socket.current = io.connect(host);
+      console.log(socket.current)
+      // socket.current.emit("get_direct_conversations", (response) => {
+      //   console.log(response)
+      // });
     }
-  }, [currentUser]);
+  });
 
-  useEffect(async () => {
-    if (currentUser) {
-      if (currentUser.isAvatarImageSet) {
-        const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-        setContacts(data.data);
-      } else {
-        navigate("/setAvatar");
-      }
-    }
-  }, [currentUser]);
+  // useEffect(async () => {
+  //   if (currentUser) {
+  //     if (currentUser.isAvatarImageSet) {
+  //       const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+  //       setContacts(data.data);
+  //     } else {
+  //       navigate("/setAvatar");
+  //     }
+  //   }
+  // }, [currentUser]);
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };

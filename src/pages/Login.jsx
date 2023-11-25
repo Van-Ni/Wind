@@ -5,6 +5,7 @@ import { LoginSocialGoogle } from 'reactjs-social-login'
 import { GoogleLoginButton } from 'react-social-login-buttons'
 
 import '../assets/css/loginStyle.css';
+import Validator from '../assets/js/validator';
 
 import { login } from "../redux/actions/authActions";
 
@@ -18,14 +19,16 @@ export default function Login() {
   const token = useSelector(state => state.authReducer.token);
   const message = useSelector(state => state.authReducer.message);
 
-  // Login and set token
-  const submitForm = useCallback((e) => {
-    e.preventDefault();
-    dispatch(login(email, password));
-    sessionStorage.setItem("email", email);
-  }, [dispatch, email, password]);
+  // Login
+  useEffect(() => {
+    var form = new Validator('#login-form')
+    form.onSubmit = function (data) {
+      dispatch(login(data.email, data.password))
+      sessionStorage.setItem("email", data.email);
+    }
+  }, [])
 
-  // Navigate to chat box when user have token
+  // Set token and navigate to chatbox
   useEffect(() => {
     if (token) {
       sessionStorage.setItem("token", token);
@@ -35,7 +38,7 @@ export default function Login() {
 
   // Auto navigate to chat when token is exist in session
   useEffect(() => {
-    if (sessionStorage.getItem("token")) 
+    if (sessionStorage.getItem("token"))
       navigate("/");
   }, [navigate])
 
@@ -47,10 +50,16 @@ export default function Login() {
             <h1 className="logo">WinD</h1>
             <p>Connect with friends and the world around you on WinD.</p>
           </div>
-          <form onSubmit={submitForm}>
-            <input type="text" placeholder="Email or Phone Number" required={true} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" required={true} onChange={e => setPassword(e.target.value)} />
-            <input type="submit" value="Log in" className="login" />
+          <form id="login-form" method="POST" action="">
+            <div className="form-group">
+              <input id="email" name="email" type="text" className="form-control" placeholder="Email" rules="required|email"/>
+              <span className="form-message"></span>
+            </div>
+            <div className="form-group">
+              <input id="password" name="password" type="password" placeholder="Password" rules="required|min:6"/>
+              <span className="form-message"></span>
+            </div>
+            <input type="submit" value="Log in" className="login form-submit" />
             <LoginSocialGoogle
               scope={'email'}
               client_id={REACT_APP_GG_APP_ID || ''}
