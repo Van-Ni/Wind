@@ -62,15 +62,18 @@ export const loginWithEmail = (email) => {
     }
 };
 
-export const register = (firstname, lastname, email, password) => {
+export const register = (firstname, lastname, email, password,confirmPassword) => {
     // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
     // Trả về một action có type và payload tương ứng
+    if (password !== confirmPassword) {
+        return Promise.reject('Password and Confirm Password must match.');
+      }
     return (dispatch) => {
         fetch("https://wind-be.onrender.com/auth/register", {
             method: "POST",
             body: JSON.stringify({
                 firstName: firstname,
-                lastname: lastname,
+                lastName: lastname,
                 email: email,
                 password: password,
             }),
@@ -82,12 +85,13 @@ export const register = (firstname, lastname, email, password) => {
             .then((response) => response.json())
             .then((data) => {
                 dispatch({
-                    type: "ADD",
+                    type: "REGISTER",
                     payload: {
-                        message: "Add room success!",
+                        message: data.message,
                     },
                 });
             })
-            .catch((err) => { });
+            .catch((err) => { console.log(err) });
+            
     }
 };
