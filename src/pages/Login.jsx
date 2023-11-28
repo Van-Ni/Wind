@@ -56,7 +56,7 @@ export default function Login() {
               <span className="form-message"></span>
             </div>
             <div className="form-group">
-              <input id="password" name="password" type="password" placeholder="Password" rules="required|min:6"/>
+              <input id="password" name="password" type="password" className="form-control" placeholder="Password" rules="required|min:6"/>
               <span className="form-message"></span>
             </div>
             <input type="submit" value="Log in" className="login form-submit" />
@@ -71,7 +71,7 @@ export default function Login() {
               onReject={(err) => {
               }}
             >
-              <GoogleLoginButton style={{ fontSize: '16px', width: '345px', margin: '0px' }} />
+              <GoogleLoginButton style={{ fontSize: '16px', width: '345px', margin: '8px 0px 0px 0px' }} />
             </LoginSocialGoogle>
             <a href="#">Forgot Password ?</a>
             <hr />

@@ -37,7 +37,7 @@
     background: #fff;
     padding: 2rem;
     width: 530px;
-    height: 380px;
+    min-height: 380px;
     border-radius: 0.5rem;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
@@ -45,8 +45,9 @@
 #register-container form input {
     outline: none;
     padding: 0.8rem 1rem;
-    margin-bottom: 0.8rem;
+    margin-top: 0.8rem;
     font-size: 16px;
+    width: 100%;
 }
 
 #register-container form input:focus {
@@ -96,6 +97,20 @@
     background: #03ad06;
     cursor: pointer;
 }
+
+#register-container .form-group.invalid .form-message {
+    color: #f33a58;
+    font-size: 14px;
+}
+
+#register-container .form-control:hover {
+    border-color: #1dbfaf;
+}
+
+#register-container .form-group.invalid .form-control {
+    border-color: #f33a58;
+}
+
 
 /* //.........Media Query.........// */
 
