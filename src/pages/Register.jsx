@@ -8,185 +8,83 @@ import { registerRoute } from "../utils/APIRoutes";
 import '../assets/css/registerStyle.css';
 
 export default function Register() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const message = useSelector(state => state.authReducer.message);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      setTimeout(() => {
-        navigate('/');
-      })
-    }
-  }, [sessionStorage.getItem("token")])
-  
-  const toastOptions = {
-    position: "top-center",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  };
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  useEffect(() => {
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
-      navigate("/");
-    }
-  }, []);
-
-  const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
-
-  const handleValidation = () => {
-    const { password, confirmPassword, username, email } = values;
+  const handleRegister = (e) => {
+    e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error(
-        "Password and confirm password should be same.",
-        toastOptions
-      );
-      return false;
-    } else if (username.length < 3) {
-      toast.error(
-        "Username should be greater than 3 characters.",
-        toastOptions
-      );
-      return false;
-    } else if (password.length < 8) {
-      toast.error(
-        "Password should be equal or greater than 8 characters.",
-        toastOptions
-      );
-      return false;
-    } else if (email === "") {
-      toast.error("Email is required.", toastOptions);
-      return false;
+      toast.error(message);
+      return;
     }
-
-    return true;
+    dispatch(register(firstName, lastName, email, password,confirmPassword));
   };
+  useEffect(() => {
+    if (message ==="Email already in use, Please login.") {
+      toast.error(message);
+    }else if(message ==="Registration Success."){
+    toast.success(message);
+      // Điều hướng đến trang đăng nhập 
+      navigate('/login');}
+  }, [message, navigate]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (handleValidation()) {
-      const { email, username, password } = values;
-      const { data } = await axios.post(registerRoute, {
-        username,
-        email,
-        password,
-      });
-
-      if (data.status === false) {
-        toast.error(data.msg, toastOptions);
-      }
-      if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
-        navigate("/");
-      }
-    }
-  };
   
+
   return (
     <>
-      
+    <ToastContainer position={toast.POSITION.TOP_CENTER } style={{ fontSize: "40px" }} />
       <div id="register-container" className="content">
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>
-            <p>Connect with friends and the world around you on Facebook.</p>
+            <p>Connect with friends and the world around you on WinD.</p>
           </div>
-          <form action="" onSubmit={(event) => handleSubmit(event)}>
-            <input type="text" name="email" onChange={(e) => handleChange(e)} placeholder="Email or Phone Number" required="true" />
-            <input type="text" name="username" onChange={(e) => handleChange(e)} placeholder="Fullname" required="true" />
-            <input type="password" name="password" onChange={(e) => handleChange(e)} placeholder="Password" required="true" />
-            <input type="password" name="confirmPassword" onChange={(e) => handleChange(e)} placeholder="Enter Password Again" required="true" />
-            <button type="submit" className="login">Sign up</button>
+          <form onSubmit={handleRegister}>
+            <input
+              type="text"
+              placeholder="First Name"
+              required={true}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              required={true}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              required={true}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required={true}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              required={true}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <input type="submit" value="Register" className="login" />
             <hr />
-            <Link to='/login'>Already have account? Login now</Link>
+            <Link  to="/login">
+              Already have an account? Log in
+            </Link>
           </form>
         </div>
       </div>
-      
-      <ToastContainer />
     </>
   );
 }
-
-const FormContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  background-color: #131324;
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 5rem;
-    }
-    h1 {
-      color: white;
-      text-transform: uppercase;
-    }
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: #00000076;
-    border-radius: 2rem;
-    padding: 3rem 5rem;
-  }
-  input {
-    background-color: transparent;
-    padding: 1rem;
-    border: 0.1rem solid #4e0eff;
-    border-radius: 0.4rem;
-    color: white;
-    width: 100%;
-    font-size: 1rem;
-    &:focus {
-      border: 0.1rem solid #997af0;
-      outline: none;
-    }
-  }
-  button {
-    background-color: #4e0eff;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    &:hover {
-      background-color: #4e0eff;
-    }
-  }
-  span {
-    color: white;
-    text-transform: uppercase;
-    a {
-      color: #4e0eff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
-`;
