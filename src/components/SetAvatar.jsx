@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Buffer } from "buffer";
-import loader from "../assets/loader.gif";
+import loader from "../assets/img/loader.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -151,7 +151,7 @@ const Container = styled.div`
     font-weight: bold;
     cursor: pointer;
     border-radius: 0.4rem;
-    font-size: 1rem;
+    font-size: 10px;
     text-transform: uppercase;
     &:hover {
       background-color: #4e0eff;

@@ -1,8 +1,10 @@
+import { loginRoute, registerRoute } from "../../utils/APIRoutes";
+
 export const login = (email, password) => {
     // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
     // Trả về một action có type và payload tương ứng
     return (dispatch) => {
-        fetch("https://wind-be.onrender.com/auth/login", {
+        fetch(loginRoute, {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -69,7 +71,7 @@ export const register = (firstname, lastname, email, password,confirmPassword) =
         return Promise.reject('Password and Confirm Password must match.');
       }
     return (dispatch) => {
-        fetch("https://wind-be.onrender.com/auth/register", {
+        fetch(registerRoute, {
             method: "POST",
             body: JSON.stringify({
                 firstName: firstname,

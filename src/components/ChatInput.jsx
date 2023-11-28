@@ -53,10 +53,10 @@ const Container = styled.div`
   align-items: center;
   grid-template-columns: 5% 95%;
   background-color: #fff;
-  padding: 0 2rem;
+  padding: 4px 12px;
+  border-top: 1px solid #ccc;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
-    padding: 0 1rem;
-    gap: 1rem;
+    padding: 4px 12px;
   }
   .button-container {
     display: flex;
@@ -66,7 +66,7 @@ const Container = styled.div`
     .emoji {
       position: relative;
       svg {
-        font-size: 2.2rem;
+        font-size: 22px;
         color: #ccc;
         cursor: pointer;
       }
@@ -114,7 +114,7 @@ const Container = styled.div`
       color: #000;
       border: none;
       padding-left: 1rem;
-      font-size: 1.6rem;
+      font-size: 14px;
 
       &::selection {
         background-color: #9a86f3;
@@ -129,16 +129,16 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #9a86f3;
+      background-color: #3b71ca;
       border: none;
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;
         svg {
-          font-size: 1rem;
+          font-size: 10px;
         }
       }
       svg {
-        font-size: 2rem;
+        font-size: 20px;
         color: white;
       }
     }

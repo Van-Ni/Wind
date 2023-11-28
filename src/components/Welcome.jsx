@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Robot from "../assets/robot.gif";
+import Robot from "../assets/img/robot.gif";
 export default function Welcome() {
-  const [userName, setUserName] = useState("");
+  // const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState(undefined);
 
-  useEffect(async () => {
-    setUserName(
-      await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-      ).username
-    );
-  }, []);
+  // useEffect(async () => {
+  //   setUserName(
+  //     await JSON.parse(
+  //       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+  //     ).username
+  //   );
+  // }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem("email")) {
@@ -36,12 +36,12 @@ const Container = styled.div`
   align-items: center;
   color: white;
   flex-direction: column;
-  font-size: 2.2rem;
+  font-size: 16px;
   img {
     height: 20rem;
   }
   span {
-    color: #4e0eff;
-    font-size: 2.2rem;
+    color: #fff;
+    font-size: 18px;
   }
 `;

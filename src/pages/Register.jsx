@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import { register } from '../redux/actions/authActions';
-
-import 'react-toastify/dist/ReactToastify.css';
-import '../assets/css/authStyle.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { registerRoute } from "../utils/APIRoutes";
+import '../assets/css/registerStyle.css';
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ export default function Register() {
   return (
     <>
     <ToastContainer position={toast.POSITION.TOP_CENTER } style={{ fontSize: "40px" }} />
-      <div className="content">
+      <div id="register-container" className="content">
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>

@@ -8,7 +8,7 @@ export default function Logout() {
   const navigate = useNavigate();
   const handleLogout = () => {
     sessionStorage.removeItem("token");
-    navigate('/login');
+    window.location.reload()
   };
   return (
     <Button onClick={handleLogout}>
@@ -21,15 +21,14 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
+  padding: 8px;
+  margin: 2px 0;
   border-radius: 0.5rem;
-  background-color: #9a86f3;
+  background-color: #3b71ca;
   border: none;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
   svg {
-    font-size: 1.6rem;
+    font-size: 16px;
     color: #ebe7ff;
   }
 `;

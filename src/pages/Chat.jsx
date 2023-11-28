@@ -15,33 +15,37 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userEmail, setUserEmail] = useState(undefined);
+  
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
         navigate('/login');
       })
+    } else {
+      setCurrentUser(sessionStorage.getItem("email"));
     }
-  }, [sessionStorage.getItem("token")]);
-
-  
+  }, [navigate]);
 
   useEffect(() => {
     if (currentUser) {
-      socket.current = io(host);
-      socket.current.emit("add-user", currentUser._id);
+      socket.current = io.connect(host);
+      console.log(socket.current)
+      // socket.current.emit("get_direct_conversations", (response) => {
+      //   console.log(response)
+      // });
     }
-  }, [currentUser]);
+  });
 
-  useEffect(async () => {
-    if (currentUser) {
-      if (currentUser.isAvatarImageSet) {
-        const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-        setContacts(data.data);
-      } else {
-        navigate("/setAvatar");
-      }
-    }
-  }, [currentUser]);
+  // useEffect(async () => {
+  //   if (currentUser) {
+  //     if (currentUser.isAvatarImageSet) {
+  //       const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+  //       setContacts(data.data);
+  //     } else {
+  //       navigate("/setAvatar");
+  //     }
+  //   }
+  // }, [currentUser]);
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
@@ -69,11 +73,11 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: rgb(229, 239, 255);;
   .container {
     height: 85vh;
     width: 85vw;
-    background-color: #0091ff;
+    background-color: #3b71ca;
     display: grid;
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
