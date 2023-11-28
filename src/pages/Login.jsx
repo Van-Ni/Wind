@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import { LoginSocialGoogle } from 'reactjs-social-login'
 import { GoogleLoginButton } from 'react-social-login-buttons'
+import { ToastContainer, toast } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import '../assets/css/loginStyle.css';
 import Validator from '../assets/js/validator';
 
@@ -14,8 +16,6 @@ const REACT_APP_GG_APP_ID = '65679218423-r4jlmm8apk41itpck18igdc5g6nba64u.apps.g
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const token = useSelector(state => state.authReducer.token);
   const message = useSelector(state => state.authReducer.message);
 
@@ -28,11 +28,11 @@ export default function Login() {
     }
   }, [])
 
-  // Set token and navigate to chatbox
+  // Set token and navigate to friends list
   useEffect(() => {
     if (token) {
       sessionStorage.setItem("token", token);
-      navigate("/");
+      navigate("/friend");
     }
   }, [token, navigate])
 
@@ -42,8 +42,15 @@ export default function Login() {
       navigate("/");
   }, [navigate])
 
+  useEffect(() => {
+    if (message) {
+      toast.error(message);
+    }
+  }, [message, navigate]);
+
   return (
     <>
+      <ToastContainer position={toast.POSITION.TOP_CENTER} style={{ fontSize: "16px" }} />
       <div id="login-container" className="content">
         <div className="flex-div">
           <div className="name-content">
@@ -52,11 +59,11 @@ export default function Login() {
           </div>
           <form id="login-form" method="POST" action="">
             <div className="form-group">
-              <input id="email" name="email" type="text" className="form-control" placeholder="Email" rules="required|email"/>
+              <input id="email" name="email" type="text" className="form-control" placeholder="Email" rules="required|email" />
               <span className="form-message"></span>
             </div>
             <div className="form-group">
-              <input id="password" name="password" type="password" className="form-control" placeholder="Password" rules="required|min:6"/>
+              <input id="password" name="password" type="password" className="form-control" placeholder="Password" rules="required|min:6" />
               <span className="form-message"></span>
             </div>
             <input type="submit" value="Log in" className="login form-submit" />
