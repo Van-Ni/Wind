@@ -1,6 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+  #addfriend-container .container-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+ 
+/* Các quy tắc CSS khác giống như trước */
+#addfriend-container .image {
+  width: 100%;
+}
+
+#addfriend-container .text-name {
+  text-align: center;
+}
+ 
+#addfriend-container .button {
+  text-align: center;
+}
+
 #addfriend-container.container {
   display: flex;
   flex-wrap: wrap;
+  height: 1080px;
+  overflow-y: auto;
 }
 
 #addfriend-container .top-menu {
@@ -15,9 +39,8 @@
 
 
 #addfriend-container .left-sidebar {
-  flex-basis: 360px;
+  flex-basis: 250px;
 
-  width: 360px;
   height: 996px;
   flex-shrink: 0;
   background: #FDFDFD;
@@ -45,21 +68,25 @@
 }
 
 #addfriend-container .content {
-  flex-basis: calc(100% - 447px);
-  width: 1300px;
-  height: 1000px;
+  flex: 0 0 calc(83.33% - 10px);
+  width: 1600px !important;
+  height: 900px;
   flex-shrink: 0;
   background: #E8E8E8;
-  margin-left: 90px;
-  margin-top: 228px;
+  margin-left: 0px;
+  margin-top: 0px;
   /* Khoảng cách giữa content và top-menu */
 }
 
 #addfriend-container .container-card {
-  margin-left: 40px;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 
 #addfriend-container .card {
+  
+   
+  align-items: center; 
   width: 230px;
   height: 336px;
   flex-shrink: 0;
@@ -146,7 +173,7 @@
 /* Media queries */
 @media (max-width: 1200px) {
   #addfriend-container.container {
-    justify-content: center;
+    justify-content: flex-start ;
   }
 
   #addfriend-container .left-sidebar {
@@ -225,6 +252,35 @@
   margin-right: 45px;
 }
 
+#addfriend-container .ui.link.cards .card .header,
+.ui.link.cards .card .meta {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#addfriend-container .ui.link.card {
+  flex-basis: calc(33.33% - 10px);   /* Độ rộng của mỗi thẻ (33.33% của không gian cha với khoảng cách là 10px) */
+  margin-bottom: 20px;
+  box-sizing: border-box;  /* Đảm bảo rằng padding và border không làm tăng kích thước thực tế */
+}
+#addfriend-container.ui.link.cards .card {
+  width: 100%;
+  height: 425px;
+}
+
+#addfriend-container .ui {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+}
+#addfriend-container .four-wide-column{
+  display: flex;  /* Sử dụng flexbox để hiển thị các phần tử con ngang nhau */
+  flex-wrap: wrap;  /* Cho phép các phần tử con tự xuống dòng khi không đủ không gian */
+  justify-content: center;
+  flex: 0 1 calc(25% - 10px); /* Giới hạn mỗi phần tử trên mỗi dòng là 4 */
+  margin-bottom: 10px; /* Khoảng cách giữa các phần tử */
+}
+
 @media (max-width: 767px) {
   #addfriend-container .top-menu {
     display: none;
@@ -232,5 +288,6 @@
 
   #addfriend-container .card {
     width: 100%;
+    align-items: center; 
   }
 }

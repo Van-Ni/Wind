@@ -11,24 +11,26 @@ export const login = (email, password) => {
                 password: password,
             }),
 
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                dispatch({
-                    type: "LOGIN",
-                    payload: {
-                        message: "Login success!",
-                        status: data.status,
-                        token: data.token,
-                        message: data.message,
-                    },
-                });
-            })
-            .catch((err) => { console.log(err) });
-    }
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            message: "Login success!",
+            status: data.status,
+            token: data.token,
+            message: data.message,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
 
 export const loginWithEmail = (email) => {
@@ -43,25 +45,27 @@ export const loginWithEmail = (email) => {
                 email: email,
             }),
 
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                dispatch({
-                    type: "LOGIN",
-                    payload: {
-                        message: "Login success!",
-                        status: data.status,
-                        token: data.token,
-                        message: data.message,
-                        data: data
-                    },
-                });
-            })
-            .catch((err) => { console.log(err) });
-    }
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            message: "Login success!",
+            status: data.status,
+            token: data.token,
+            message: data.message,
+            data: data,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 };
 
 export const register = (firstname, lastname, email, password) => {

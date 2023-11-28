@@ -10,7 +10,7 @@
 body {
   max-height: 100vh;
   max-width: 100vw;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .Toastify__toast-theme--dark {
