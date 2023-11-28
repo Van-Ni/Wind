@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Profiles = () => {
-  const navigate = useNavigate();
 
   // Khởi tạo userData với các thuộc tính mặc định là chuỗi rỗng
   const [userData, setUserData] = useState({
@@ -40,8 +39,8 @@ const Profiles = () => {
       const response = await fetch("https://wind-be.onrender.com/user/get-me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTU5Y2IxNzk0ZTI2NDNhNjA3YjY1MzQiLCJpYXQiOjE3MDA5MDgzMTgsImV4cCI6MTcwMDk5NDcxOH0.kgioHa7HjwbXui1JiuYRO3p9IAiqDvYhLqufSROzarw`}`,
-          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       });
 

@@ -1,46 +1,59 @@
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./editprofiles.css";
 
 const UpdateInformationForm = () => {
+
   const [displayname, setDisplayName] = useState("");
-  const [accountname, setAccountName] = useState("");
-  const [gender, setGender] = useState("");
   const [dob, setDob] = useState("");
+
+  // const navigate = useNavigate();
+
+  useEffect(() => {
+  }, [displayname]);
+
+  const handleCancel = () => {
+  };
 
   const handleUpdate = async () => {
     try {
       const confirmed = window.confirm('Are you sure you want to update your profile?');
   
       if (!confirmed) {
-        return; // Người dùng không xác nhận, thoát khỏi hàm
+        return; // User did not confirm, exit the function
       }
   
-      const response = await fetch('https://wind-be.onrender.com/user/update-me', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          displayname,
-          accountname,
-          gender,
-          dob,
-        }),
-      });
+      // Check if there are changes compared to the initial state
+      if (
+        displayname !== initialState.displayname
+      ) {
+        const token = sessionStorage.getItem("token");
   
-      if (response.ok) {
-        console.log('Profile updated successfully!');
-        // Hiển thị thông báo cho người dùng hoặc cập nhật trạng thái toàn cục ở đây.
+        const response = await fetch('https://wind-be.onrender.com/user/update-me', {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            displayname,
+          }),
+        });
+  
+        if (response.ok) {
+          console.log('Profile updated successfully!');
+        } else {
+          console.error('Failed to update profile:', response.statusText);
+        }
       } else {
-        console.error('Failed to update profile:', response.statusText);
+        console.log('No changes to update.');
       }
     } catch (error) {
       console.error('An error occurred during profile update:', error);
-      // Hiển thị thông báo lỗi cho người dùng hoặc cập nhật trạng thái toàn cục ở đây.
     }
   };
-  
 
   return (
     <div className="update-information-form container">
@@ -93,7 +106,7 @@ const UpdateInformationForm = () => {
             </div>
 
             <div className="form-btn form-group">
-              <button type="button" className="btn btn-secondary">Cancel</button>
+              <button type="button" className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
               <button type="submit" className="btn btn-primary" onClick={handleUpdate}> Update </button>
             </div>
           </div>
