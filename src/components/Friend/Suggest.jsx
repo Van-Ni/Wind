@@ -16,10 +16,23 @@ function Suggest() {
   const navigate = useNavigate();
 
   const [friendrequest, setFriendrequest] = useState([]);
+  const [firstName2, setFirstName2] = useState('');
+  const [lastName2, setLastName2] = useState('');
   const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
   const [showDropdown, setShowDropdown] = useState(false);
+  const imageUrls = [
+    "https://bootdey.com/img/Content/avatar/avatar2.png",
+    "https://bootdey.com/img/Content/avatar/avatar3.png",
+    "https://bootdey.com/img/Content/avatar/avatar4.png",
+    "https://bootdey.com/img/Content/avatar/avatar5.png",
+    "https://bootdey.com/img/Content/avatar/avatar6.png",
+    "https://bootdey.com/img/Content/avatar/avatar7.png",
+    "https://bootdey.com/img/Content/avatar/avatar8.png",
+    "https://bootdey.com/img/Content/avatar/avatar1.png"
+  ];
+  const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];  
 
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
@@ -40,7 +53,7 @@ function Suggest() {
     const endIndex = startIndex + productsPerPage;
     return friendrequest.slice(startIndex, endIndex);
   }, [friendrequest]);
-  console.log("a"+displayedFRRS)
+ 
 
 
 
@@ -76,136 +89,118 @@ function Suggest() {
             console.log("Không có dữ liệu hoặc dữ liệu không đúng định dạng");
           }
         })
+        fetch("https://wind-be.onrender.com/user/get-me", {
+          method: "GET",
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 'success') {
+            const { firstName, lastName } = data.data;
+            
+            // Update state or do other actions with the data
+            setFirstName2(firstName);
+            setLastName2(lastName);
+          } else {
+            console.log("Không có dữ liệu hoặc dữ liệu không đúng định dạng");
+          }
+        })
         .catch((error) => console.log(error));
-    }
-  }, []);
+      }
+    }, []);
 
   console.log(friendrequest)
 
   const { firstName, lastName, _id } = displayedFRRS[0]?.sender || {};
   
   return (
-   <>
-   <div id="addfriend-container" className="container">
-      <div className="top-menu">
-        <div className="logo-icon">
-          <a className="text-icon">
-            <h2 className="text-h2">W</h2>
-          </a>
-        </div>
-        <div className="search-bar">
-          <input></input>
-        </div>
-        <div className="button-container">
-          <a href="./" className="home-button">
-            <img className="img-icon" src={Homebutton} alt="logo" />
-          </a>
-          <a href="./" className="home-button">
-            <img className="img-icon" src={FriendIcon} alt="logo" />
-          </a>
-        </div>
-        <div className="button-container1">
-          <a href="#" className="home-button">
-            <img className="img-icon" src={MenuIcon} alt="logo" />
-          </a>
-          <a href="/" className="home-button">
-            <img className="img-icon" src={MsgIcon} alt="logo" />
-          </a>
-          <a href="#" className="home-button">
-            <img className="img-icon" src={NofiIcon} alt="logo" />
-          </a>
-          <div className="dropdown">
-      <a href="#" className="home-button" onClick={handleDropdownToggle}>
-        <img className="img-icon" src={AvtIcon} alt="logo" />
-      </a>
-      {showDropdown && (
-        <div className="dropdown-content">
-          <a href="#" >
-            Infomation
-          </a>
-          <br/>
-          <a href="#" onClick={() => handleOptionClick()}>
-            SignOut
-          </a>
-        </div>
-      )}
-    </div>
-        </div>
-      </div>
-      <div className="left-sidebar">
-        <h2>Friends</h2>
-        <ul>
-          <li>
-            <img className="img-icon" src={IconRq} alt="logo" />
-            <a href="./request">Friend Request</a> 
-          </li>
-          <li>
-            <img className="img-icon" src={Iconsugesst} alt="logo" />
-            <a >Suggest</a>
-          </li>
-          <li>
-            <img className="img-icon" src={IconAll} alt="logo" />
-            <a href="./"> All Friends</a>
-          </li>
+    <>
+    <div className="container">
+   <div id="content" className="content p-0">
+       <div className="profile-header">
+           <div className="profile-header-cover"></div>
+           <div className="profile-header-content">
+               <div className="profile-header-img mb-4">
+                   <img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="mb-4" alt="" />
+               </div>
+   
+               <div className="profile-header-info">
+               <h4 class="m-t-sm">{`${firstName2} ${lastName2}`}</h4>
+                  
+                   <a href="#" className="btn btn-xs btn-primary mb-2">Edit Profile</a>
+               </div>
+           </div>
+   
+           <ul class="profile-header-tab nav nav-tabs">
+            <li class="nav-item"><a href="#profile-post" class="nav-link" data-toggle="tab">POSTS</a></li>
+            <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a></li>
+            <li class="nav-item"><a href="friend/suggest" class="nav-link active show" data-toggle="tab">SUGGEST</a></li>
+            <li class="nav-item"><a href="/friend/request" class="nav-link" data-toggle="tab">FRIEND REQUEST</a></li>
+            <li class="nav-item"><a href="/friend" class="nav-link " data-toggle="tab">FRIENDS</a></li>
         </ul>
-      </div>
-
-      <div className="content">
-        <h1 className="text-frrq">Friend Suggest </h1>
-        {/* <div className="ui grid container">
-        {displayedProducts.map((friendrequest) => {
-          const { id, firstName  , lastName} =
-          friendrequest;
-
-          return (
-            <div className="four wide column" key={id}>
-              <a href={`/friend:${id}`}>
-                <div className="ui link cards">
-                  <div className="card">
-                    <div className="image">
-                      <img src={"DefaultAvt"} />
-                    </div>
-                    <div className="content">
-                      <div className="header">{firstName+ lastName}</div>
-                     
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          );
-        })}
-      </div> */}
- <div className="container-card">
-  {displayedFRRS.map((request, index) => {
-    // Kiểm tra xem request và sender có tồn tại không
-    if (request ) {
-     
-      const { firstName, lastName, _id } = request;
-
-      return (
-        <div className="four-wide-column" key={_id}>
-        <div className="card" key={index}>
-          <div className="image">
-            <img className="image" src={DefaultAvt} alt={`Avatar_${_id}`} />
-          </div>
-          <div className="text-name">{`${firstName} ${lastName}`}</div>
-          <div className="button">
-            <button>Add Friend</button>
-            <button>Delete</button>
-          </div>
-        </div>
-        </div>
-      );
-    } else {
-      // Trả về một phần tử trống nếu dữ liệu không hợp lệ
-      return null;
-    }
-  })}
-</div>
-      </div>
-    </div>
-    </>
+       </div>
+   
+       <div className="profile-container">
+           <div className="row row-space-20">
+               <div className="col-md-8">
+                   <div className="tab-content p-0">
+   
+                       <div className="tab-pane fade active show" id="profile-friends">
+                           <div className="m-b-10"><b>Friend Suggest</b></div>
+   
+                           <ul className="friend-list clearfix">
+                           {displayedFRRS.map((request, index) => {
+       // Kiểm tra xem request và sender có tồn tại không
+       if (request ) {
+        
+         const { firstName, lastName, _id } = request;
+         const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+         return (
+           <li key={_id}>
+           <a href="#">
+               <div className="friend-img"><img src={randomImageUrl} alt="" /></div>
+               <div className="friend-info">
+                   <h4>{`${firstName} ${lastName}`}</h4>
+                   <p>Add Friend</p>
+               </div>
+           </a>
+       </li>
+             );
+           } else {
+             // Trả về một phần tử trống nếu dữ liệu không hợp lệ
+             return null;
+           }
+         })}
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+   
+               {/* <div className="col-md-4 hidden-xs hidden-sm">
+                   <ul className="profile-info-list">
+                   
+                       <li className="title">FRIEND LIST (9)</li>
+                       <li className="img-list">
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" /></a>
+                           <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
+                       </li>
+                   </ul>
+               </div> */}
+           </div>
+       </div>
+   </div>
+   </div>
+       </>
   );
 }
 
