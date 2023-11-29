@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 
-export default function ChatContainer({ currentChat, socket }) {
+export default function ChatContainer({ currentChat }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
@@ -37,11 +37,11 @@ export default function ChatContainer({ currentChat, socket }) {
     const data = await JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
-    socket.current.emit("send-msg", {
-      to: currentChat._id,
-      from: data._id,
-      msg,
-    });
+    // socket.current.emit("send-msg", {
+    //   to: currentChat._id,
+    //   from: data._id,
+    //   msg,
+    // });
     await axios.post(sendMessageRoute, {
       from: data._id,
       to: currentChat._id,
@@ -54,11 +54,11 @@ export default function ChatContainer({ currentChat, socket }) {
   };
 
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
-        setArrivalMessage({ fromSelf: false, message: msg });
-      });
-    }
+    // if (socket.current) {
+    //   socket.current.on("msg-recieve", (msg) => {
+    //     setArrivalMessage({ fromSelf: false, message: msg });
+    //   });
+    // }
   }, []);
 
   useEffect(() => {
