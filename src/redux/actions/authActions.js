@@ -1,8 +1,10 @@
+import { loginRoute, registerRoute } from "../../utils/APIRoutes";
+
 export const login = (email, password) => {
     // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
     // Trả về một action có type và payload tương ứng
     return (dispatch) => {
-        fetch("https://wind-be.onrender.com/auth/login", {
+        fetch(loginRoute, {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -35,7 +37,7 @@ export const loginWithEmail = (email) => {
     // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
     // Trả về một action có type và payload tương ứng
     return (dispatch) => {
-        fetch("https://wind-be.onrender.com/auth/login", {
+        fetch(loginRoute, {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -66,15 +68,14 @@ export const register = (firstname, lastname, email, password) => {
     // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
     // Trả về một action có type và payload tương ứng
     return (dispatch) => {
-        fetch("https://wind-be.onrender.com/auth/register", {
+        fetch(registerRoute, {
             method: "POST",
             body: JSON.stringify({
-                firstName: firstname,
-                lastname: lastname,
-                email: email,
-                password: password,
+                "firstName": firstname,
+                "lastName": lastname,
+                "email": email,
+                "password": password,
             }),
-
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
             },
@@ -82,12 +83,13 @@ export const register = (firstname, lastname, email, password) => {
             .then((response) => response.json())
             .then((data) => {
                 dispatch({
-                    type: "ADD",
+                    type: "REGISTER",
                     payload: {
-                        message: "Add room success!",
+                        message: data.message,
                     },
                 });
             })
-            .catch((err) => { });
+            .catch((err) => { console.log(err) });
+            
     }
 };

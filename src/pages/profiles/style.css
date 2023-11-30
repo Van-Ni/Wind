@@ -53,6 +53,10 @@ body {
 	background-color: #f5f7fa;
 }
 
+#profiles-container h4 {
+  margin-right: 20px;
+}
+
 #profiles-container .testimonial-card .card-up {
   height: 120px;
   overflow: hidden;

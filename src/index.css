@@ -4,19 +4,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: -0.5%;
-}
-
-body,
-button,
-input {
   font-family: 'Montserrat', sans-serif;
 }
 
 body {
   max-height: 100vh;
   max-width: 100vw;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .Toastify__toast-theme--dark {

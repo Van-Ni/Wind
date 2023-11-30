@@ -8,7 +8,7 @@ const Profiles = () => {
 
   // Khởi tạo userData với các thuộc tính mặc định là chuỗi rỗng
   const [userData, setUserData] = useState({
-    username: '',
+    fullname: '',
     avatar: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.6435-9/190108336_322648402555040_2100790391455013605_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=be3454&_nc_ohc=5M6dc--QEiUAX-e7CiS&_nc_ht=scontent.fhan4-1.fna&oh=00_AfAs7VU4nQ2aIxiVK-q8HqkgD5bEprMEYMe1ZRK4F3JQJg&oe=6584D480',
     phone: '0371233559',
     gender: 'Male',
@@ -50,14 +50,17 @@ const Profiles = () => {
 
       // Chuyển đổi dữ liệu từ JSON
       const data = await response.json();
-
       const fullname = `${data.data.firstName} ${data.data.lastName}`;
-      data.fullname = fullname;
-      setUserData(data);
+      return {
+        fullname: fullname,
+        phone: '0371233559',
+        gender: 'Male',
+        dateOfBirth: '20/10/2000',
+        avatar: data.data.avatar.url
+      };
       // console.log(data)
-        
+
       // Trả về dữ liệu người dùng từ API
-      return data;
     } catch (error) {
       console.error('Error fetching user data:', error);
       throw error;
@@ -76,7 +79,12 @@ const Profiles = () => {
           <div className="card-up aqua-gradient"></div>
           <div className="avatar mx-auto white">
             <img
-              src="https://scontent.fhan4-1.fna.fbcdn.net/v/t1.6435-9/190108336_322648402555040_2100790391455013605_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=be3454&_nc_ohc=5M6dc--QEiUAX-e7CiS&_nc_ht=scontent.fhan4-1.fna&oh=00_AfAs7VU4nQ2aIxiVK-q8HqkgD5bEprMEYMe1ZRK4F3JQJg&oe=6584D480"
+              style={{
+                "width": "100%",
+                "height": "115px",
+                "object-fit": "cover",
+              }}
+              src={userData.avatar}
               className="rounded-circle img-fluid"
               alt="avatar"
             />
@@ -92,7 +100,7 @@ const Profiles = () => {
                     <label className="info-label">Phone:</label>
                     <input
                       type="text"
-                      defaultValue={userData.phone }
+                      defaultValue={userData.phone}
                       className="info-value"
                       readOnly
                     />
@@ -101,7 +109,7 @@ const Profiles = () => {
                     <label className="info-label">Gender:</label>
                     <input
                       type="text"
-                      defaultValue={userData.gender }
+                      defaultValue={userData.gender}
                       className="info-value"
                       readOnly
                     />
@@ -110,7 +118,7 @@ const Profiles = () => {
                     <label className="info-label">Date of Birth:</label>
                     <input
                       type="text"
-                      defaultValue={userData.dateOfBirth }
+                      defaultValue={userData.dateOfBirth}
                       className="info-value"
                       readOnly
                     />

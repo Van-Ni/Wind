@@ -111,7 +111,6 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
   grid-template-rows: 10% 80% 10%;
-  gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
@@ -122,6 +121,7 @@ justify-content: space-between;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    border-bottom: 1px solid #ccc;
     .user-details {
       display: flex;
       align-items: center;
@@ -134,7 +134,7 @@ justify-content: space-between;
       .username {
         h3 {
           color: #000;
-          font-size: 1.6rem;
+          font-size: 16px;
         }
       }
     }
@@ -162,7 +162,7 @@ justify-content: space-between;
         max-width: 40%;
         overflow-wrap: break-word;
         padding: 1rem;
-        font-size: 1.1rem;
+        font-size: 11px;
         border-radius: 1rem;
         color: #d1d1d1;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
