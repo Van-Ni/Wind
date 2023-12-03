@@ -1,13 +1,15 @@
+import { loginRoute, registerRoute } from "../../utils/APIRoutes";
+
 export const login = (email, password) => {
-  // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
-  // Trả về một action có type và payload tương ứng
-  return (dispatch) => {
-    fetch("https://wind-be.onrender.com/auth/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
+    // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
+    // Trả về một action có type và payload tương ứng
+    return (dispatch) => {
+        fetch(loginRoute, {
+            method: "POST",
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
 
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -15,6 +17,7 @@ export const login = (email, password) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         dispatch({
           type: "LOGIN",
           payload: {
@@ -32,16 +35,16 @@ export const login = (email, password) => {
 };
 
 export const loginWithEmail = (email) => {
-  // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
-  // Trả về một action có type và payload tương ứng
-  // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
-  // Trả về một action có type và payload tương ứng
-  return (dispatch) => {
-    fetch("https://wind-be.onrender.com/auth/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-      }),
+    // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
+    // Trả về một action có type và payload tương ứng
+    // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
+    // Trả về một action có type và payload tương ứng
+    return (dispatch) => {
+        fetch(loginRoute, {
+            method: "POST",
+            body: JSON.stringify({
+                email: email,
+            }),
 
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -67,31 +70,31 @@ export const loginWithEmail = (email) => {
 };
 
 export const register = (firstname, lastname, email, password) => {
-  // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
-  // Trả về một action có type và payload tương ứng
-  return (dispatch) => {
-    fetch("https://wind-be.onrender.com/auth/register", {
-      method: "POST",
-      body: JSON.stringify({
-        firstName: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
-      }),
-
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({
-          type: "ADD",
-          payload: {
-            message: "Add room success!",
-          },
-        });
-      })
-      .catch((err) => {});
-  };
+    // Thực hiện xử lý đăng nhập, gọi API, kiểm tra thông tin, v.v.
+    // Trả về một action có type và payload tương ứng
+    return (dispatch) => {
+        fetch(registerRoute, {
+            method: "POST",
+            body: JSON.stringify({
+                "firstName": firstname,
+                "lastName": lastname,
+                "email": email,
+                "password": password,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch({
+                    type: "REGISTER",
+                    payload: {
+                        message: data.message,
+                    },
+                });
+            })
+            .catch((err) => { console.log(err) });
+            
+    }
 };

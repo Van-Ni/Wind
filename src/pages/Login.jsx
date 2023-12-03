@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import { LoginSocialGoogle } from 'reactjs-social-login'
 import { GoogleLoginButton } from 'react-social-login-buttons'
+import { ToastContainer, toast } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import '../assets/css/loginStyle.css';
+import Validator from '../assets/js/validator';
 
 import { login } from "../redux/actions/authActions";
 
@@ -13,45 +16,57 @@ const REACT_APP_GG_APP_ID = '65679218423-r4jlmm8apk41itpck18igdc5g6nba64u.apps.g
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const token = useSelector(state => state.authReducer.token);
   const message = useSelector(state => state.authReducer.message);
 
-  // Login and set token
-  const submitForm = useCallback((e) => {
-    e.preventDefault();
-    dispatch(login(email, password));
-    sessionStorage.setItem("token", token);
-    sessionStorage.setItem("email", email);
-  })
+  // Login
+  useEffect(() => {
+    var form = new Validator('#login-form')
+    form.onSubmit = function (data) {
+      dispatch(login(data.email, data.password))
+      sessionStorage.setItem("email", data.email);
+    }
+  }, [])
 
-  // Navigate to chat box when user have token
+  // Set token and navigate to friends list
   useEffect(() => {
     if (token) {
       sessionStorage.setItem("token", token);
-      navigate("/");
+      navigate("/friend");
     }
   }, [token, navigate])
 
   // Auto navigate to chat when token is exist in session
   useEffect(() => {
-    if (sessionStorage.getItem("token")) 
+    if (sessionStorage.getItem("token"))
       navigate("/");
   }, [navigate])
 
+  useEffect(() => {
+    if (message) {
+      toast.error(message);
+    }
+  }, [message, navigate]);
+
   return (
     <>
+      <ToastContainer position={toast.POSITION.TOP_CENTER} style={{ fontSize: "16px" }} />
       <div id="login-container" className="content">
         <div className="flex-div">
           <div className="name-content">
             <h1 className="logo">WinD</h1>
             <p>Connect with friends and the world around you on WinD.</p>
           </div>
-          <form onSubmit={submitForm}>
-            <input type="text" placeholder="Email or Phone Number" required={true} onChange={e => setEmail(e.target.value)} />
-            <input type="password" placeholder="Password" required={true} onChange={e => setPassword(e.target.value)} />
-            <input type="submit" value="Log in" className="login" />
+          <form id="login-form" method="POST" action="">
+            <div className="form-group">
+              <input id="email" name="email" type="text" className="form-control" placeholder="Email" rules="required|email" />
+              <span className="form-message"></span>
+            </div>
+            <div className="form-group">
+              <input id="password" name="password" type="password" className="form-control" placeholder="Password" rules="required|min:6" />
+              <span className="form-message"></span>
+            </div>
+            <input type="submit" value="Log in" className="login form-submit" />
             <LoginSocialGoogle
               scope={'email'}
               client_id={REACT_APP_GG_APP_ID || ''}
@@ -63,7 +78,7 @@ export default function Login() {
               onReject={(err) => {
               }}
             >
-              <GoogleLoginButton style={{ fontSize: '16px', width: '345px', margin: '0px' }} />
+              <GoogleLoginButton style={{ fontSize: '16px', width: '345px', margin: '8px 0px 0px 0px' }} />
             </LoginSocialGoogle>
             <a href="#">Forgot Password ?</a>
             <hr />
