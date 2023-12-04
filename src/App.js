@@ -10,15 +10,17 @@ import Register from "./pages/Register";
 import AddFriend from "./components/AddFriend/AddFriend"
 import Profiles from "./pages/profiles/Profiles";
 import EditProfiles from "./pages/profiles/EditProfiles"
-
-
-
+import Request from "./components/Friend/Request";
+import Suggest from "./components/Friend/Suggest";
+import Friend from "./components/Friend/Friend";
 export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/addfriend" element={<AddFriend />} />
+          <Route path="/friend/request" element={<Request />} />
+          <Route path="/friend" element={<Friend />} />
+          <Route path="/friend/suggest" element={<Suggest />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/setAvatar" element={<SetAvatar />} />
