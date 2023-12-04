@@ -1,21 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { io } from "socket.io-client";
 import styled from "styled-components";
 import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
+import { connectSocket, socket } from "../socket";
 
 export default function Chat() {
   const navigate = useNavigate();
-  const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userEmail, setUserEmail] = useState(undefined);
-  
+
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
@@ -26,15 +25,12 @@ export default function Chat() {
     }
   }, [navigate]);
 
+  console.log("currentUser", currentUser);
   useEffect(() => {
-    if (currentUser) {
-      socket.current = io.connect(host);
-      console.log(socket.current)
-      // socket.current.emit("get_direct_conversations", (response) => {
-      //   console.log(response)
-      // });
+    if (!socket) {
+      connectSocket("653385a8a95841abc1b58eee"); // login thành công lấy id của user thay vào
     }
-  });
+  }, [currentUser, socket]);
 
   // useEffect(async () => {
   //   if (currentUser) {
@@ -57,7 +53,7 @@ export default function Chat() {
           {currentChat === undefined ? (
             <Welcome />
           ) : (
-            <ChatContainer currentChat={currentChat} socket={socket} />
+            <ChatContainer currentChat={currentChat} />
           )}
         </div>
       </Container>
