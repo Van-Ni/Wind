@@ -12,6 +12,8 @@ import MenuIcon from "../../assets/img/menu.jpg";
 import AvtIcon from "../../assets/img/avt.jpg";
 import DefaultAvt from "../../assets/img/default.jpg"
 
+import { getFriendsRoute } from "../../utils/APIRoutes"
+
 function Friend() {
   const navigate = useNavigate();
 
@@ -59,7 +61,7 @@ function Friend() {
         navigate("/login");
       });
     } else {
-      fetch("https://wind-be.onrender.com/user/get-friends", {
+      fetch(getFriendsRoute, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

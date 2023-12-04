@@ -12,6 +12,8 @@ import MenuIcon from "../../assets/img/menu.jpg";
 import AvtIcon from "../../assets/img/avt.jpg";
 import DefaultAvt from "../../assets/img/default.jpg"
 
+import { getRequestsRoute } from "../../utils/APIRoutes"
+
 function Request() {
   const navigate = useNavigate();
 
@@ -59,7 +61,7 @@ function Request() {
         navigate("/login");
       });
     } else {
-      fetch("https://wind-be.onrender.com/user/get-requests", {
+      fetch(getRequestsRoute, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
