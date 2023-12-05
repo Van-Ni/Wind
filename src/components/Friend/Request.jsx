@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import io from 'socket.io-client';
+import socketio from "socket.io-client";
+
 
 
 function Request() {
@@ -36,27 +38,30 @@ function Request() {
     return friendrequest.slice(startIndex, endIndex);
   }, [friendrequest]);
  
-  const socket = io('https://wind-be.onrender.com/');
+
+  // Khởi tạo kết nối socket khi trang web được tải
+const socket = socketio.connect('https://wind-be.onrender.com/');
+
+
+socket.on('accept_request', (data) => {
+  console.log('Đã chấp nhận lời mời kết bạn:', data);
+});
+
+// Hàm xử lý sự kiện click
+const handlerClicks = () => {
+  const requestId = _id; // Thay đổi thành id của request
+  const senderId = idMe; // Thay đổi thành id của user
+  const recipientId = idMe; // Thay đổi thành id của user
   socket.on('connect', () => {
     console.log('Đã kết nối tới server socket');
   });
-  socket.on('accept_request', (data) => {
-    console.log('Đã chấp nhận lời mời kết bạn:', data);
+  // Gửi yêu cầu thông qua kết nối socket đã được khởi tạo
+  socket.emit('accept_request', {
+    request_id: requestId,
+    sender: senderId,
+    recipient: recipientId
   });
-
-  const handlerClicks = () => {
-    const requestId = _id; // Thay đổi thành id của request
-    const senderId = idMe; // Thay đổi thành id của user
-    const recipientId = idMe; // Thay đổi thành id của user
-  
-    socket.emit('accept_request', {
-      request_id: requestId,
-      sender: senderId,
-      recipient: recipientId
-    });
-console.log(requestId)
-    // console.log(socket.emit('accept_request'))
-  }
+};
   // window.addEventListener('DOMContentLoaded', () => {
   //   const acceptButton = document.querySelector('#acceptButton');
   //   acceptButton.addEventListener('click', () => {
