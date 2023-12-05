@@ -1,300 +1,603 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
   #addfriend-container .container-card {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
+ 
+/* Các quy tắc CSS khác giống như trước */
+#addfriend-container .image {
+  width: 100%;
+}
 
-  /* Các quy tắc CSS khác giống như trước */
-  #addfriend-container .image {
-    width: 100%;
-  }
+#addfriend-container .text-name {
+  text-align: center;
+}
+ 
+#addfriend-container .button {
+  text-align: center;
+}
 
-  #addfriend-container .text-name {
-    text-align: center;
-  }
+#addfriend-container.container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 1080px;
+  overflow-y: auto;
+}
 
-  #addfriend-container .button {
-    text-align: center;
-  }
+#addfriend-container .top-menu {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  width: 1650px;
+  height: 80px;
+  flex-shrink: 0;
+  background: #FDFDFD;
+}
 
+
+#addfriend-container .left-sidebar {
+  flex-basis: 250px;
+
+  height: 996px;
+  flex-shrink: 0;
+  background: #FDFDFD;
+  padding: 10px;
+}
+
+#addfriend-container .left-sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#addfriend-container .left-sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#addfriend-container .left-sidebar ul li {
+  margin-bottom: 10px;
+}
+
+#addfriend-container .left-sidebar ul li::before {
+  content: "•";
+  margin-right: 10px;
+}
+
+#addfriend-container .content {
+  flex: 0 0 calc(83.33% - 10px);
+  width: 1600px !important;
+  height: 900px;
+  flex-shrink: 0;
+  background: #E8E8E8;
+  margin-left: 0px;
+  margin-top: 0px;
+  /* Khoảng cách giữa content và top-menu */
+}
+
+#addfriend-container .container-card {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+#addfriend-container .card {
+  
+   
+  align-items: center; 
+  width: 230px;
+  height: 336px;
+  flex-shrink: 0;
+  background-color: #FDFDFD;
+  border-radius: 10px;
+}
+
+#addfriend-container .image {
+  width: 230px;
+  height: 220px;
+  flex-shrink: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+#addfriend-container .button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 175px;
+  height: 75px;
+  flex-shrink: 0;
+  margin-left: 25px;
+
+}
+
+#addfriend-container .button button {
+  width: 100%;
+  height: 50%;
+  border-radius: 10px;
+  border-color: #E8E8E8;
+  margin-top: 5px;
+}
+
+#addfriend-container .button button:nth-child(1) {
+  background: #587CFB;
+  color: white;
+
+}
+
+#addfriend-container .button button:nth-child(2) {
+  background: #E8E8E8;
+}
+
+#addfriend-container .text-name {
+  text-align: center;
+  color: #000;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
+
+}
+
+#addfriend-container .text-frrq {
+  color: #000;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 30px;
+}
+
+#addfriend-container .img-icon {
+  width: 35px;
+  height: 35px;
+}
+
+#addfriend-container .left-sidebar ul li::before {
+  content: "";
+  margin-right: 10px;
+}
+
+#addfriend-container .left-sidebar ul li {
+  display: flex;
+  align-items: center;
+}
+
+#addfriend-container .left-sidebar ul li img {
+  margin-right: 10px;
+}
+
+/* Media queries */
+@media (max-width: 1200px) {
   #addfriend-container.container {
-    display: flex;
-    flex-wrap: wrap;
-    height: 1080px;
-    overflow-y: auto;
+    justify-content: flex-start ;
   }
-
-  #addfriend-container .top-menu {
-    flex-basis: 100%;
-    display: flex;
-    align-items: center;
-    width: 1650px;
-    height: 80px;
-    flex-shrink: 0;
-    background: #FDFDFD;
-  }
-
 
   #addfriend-container .left-sidebar {
-    flex-basis: 20%;
-
-    height: 996px;
-    flex-shrink: 0;
-    background: #FDFDFD;
-    padding: 10px;
-  }
-
-  #addfriend-container .left-sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-  #addfriend-container .left-sidebar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  #addfriend-container .left-sidebar ul li {
-    margin-bottom: 10px;
-  }
-
-  #addfriend-container .left-sidebar ul li::before {
-    content: "•";
-    margin-right: 10px;
+    display: none;
   }
 
   #addfriend-container .content {
-    flex-grow: 0;
-    flex-basis: 80%;
-    width: 1600px !important;
-    height: 900px;
-    flex-shrink: 0;
-    background: #E8E8E8;
-    margin-left: 0px;
-    margin-top: 0px;
-    /* Khoảng cách giữa content và top-menu */
+    width: 100%;
+    margin-top: 0;
   }
+}
 
-  #addfriend-container .container-card {
-    margin-left: 25px;
-    margin-right: 25px;
+#addfriend-container .logo-icon {
+  margin: 5px !important;
+  ;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  padding: 7px 13px 10.875px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background: #587CFB;
+}
+
+#addfriend-container .text-icon {
+  width: 31px;
+  height: 44px;
+  color: #FFF;
+  font-family: Jomhuria;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+#addfriend-container .text-h2 {
+  margin-top: 8px;
+  text-align: center;
+
+}
+
+#addfriend-container .search-bar {
+
+  display: inline-flex;
+  padding: 11px 60px 11px 12px;
+  align-items: flex-end;
+  gap: 15px;
+  border-radius: 43px;
+  background: #E8E8E8;
+
+}
+
+#addfriend-container .button-container {
+  margin-left: 150px;
+  display: flex;
+  gap: 15px;
+}
+
+#addfriend-container .home-button {
+  border: none;
+  margin-right: 45px;
+}
+
+#addfriend-container .button-container1 {
+  margin-left: 500px;
+  display: flex;
+  gap: 15px;
+}
+
+#addfriend-container .home-button1 {
+  border: none;
+  margin-right: 45px;
+}
+
+#addfriend-container .ui.link.cards .card .header,
+.ui.link.cards .card .meta {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#addfriend-container .ui.link.card {
+  flex-basis: calc(33.33% - 10px);   /* Độ rộng của mỗi thẻ (33.33% của không gian cha với khoảng cách là 10px) */
+  margin-bottom: 20px;
+  box-sizing: border-box;  /* Đảm bảo rằng padding và border không làm tăng kích thước thực tế */
+}
+#addfriend-container.ui.link.cards .card {
+  width: 100%;
+  height: 425px;
+}
+
+#addfriend-container .ui {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
+}
+#addfriend-container .four-wide-column{
+  display: flex;  /* Sử dụng flexbox để hiển thị các phần tử con ngang nhau */
+  flex-wrap: wrap;  /* Cho phép các phần tử con tự xuống dòng khi không đủ không gian */
+  justify-content: center;
+  flex: 0 1 calc(25% - 10px); /* Giới hạn mỗi phần tử trên mỗi dòng là 4 */
+  margin-bottom: 10px; /* Khoảng cách giữa các phần tử */
+}
+
+@media (max-width: 767px) {
+  #addfriend-container .top-menu {
+    display: none;
   }
 
   #addfriend-container .card {
-
-
-    align-items: center;
-    width: 230px;
-    height: 336px;
-    flex-shrink: 0;
-    background-color: #FDFDFD;
-    border-radius: 10px;
-  }
-
-  #addfriend-container .image {
-    width: 230px;
-    height: 220px;
-    flex-shrink: 0;
-    border-radius: 10px 10px 0 0;
-  }
-
-  #addfriend-container .button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 175px;
-    height: 75px;
-    flex-shrink: 0;
-    margin-left: 25px;
-
-  }
-
-  #addfriend-container .button button {
     width: 100%;
-    height: 50%;
-    border-radius: 10px;
-    border-color: #E8E8E8;
-    margin-top: 5px;
+    align-items: center; 
   }
+}
 
-  #addfriend-container .button button:nth-child(1) {
-    background: #587CFB;
-    color: white;
-
+body{
+  background: #eaeaea;
+  margin-top:20px;
+}
+.profile-info-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.friend-list,
+.img-grid-list {
+  margin: -1px;
+  list-style-type: none;
+}
+.profile-info-list > li.title {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #8a8a8f;
+  padding: 0 0 0.3125rem;
+}
+.profile-info-list > li + li.title {
+  padding-top: 1.5625rem;
+}
+.profile-info-list > li {
+  padding: 0.625rem 0;
+}
+.profile-info-list > li .field {
+  font-weight: 700;
+}
+.profile-info-list > li .value {
+  color: #666;
+}
+.profile-info-list > li.img-list a {
+  display: inline-block;
+}
+.profile-info-list > li.img-list a img {
+  max-width: 2.25rem;
+  -webkit-border-radius: 2.5rem;
+  -moz-border-radius: 2.5rem;
+  border-radius: 2.5rem;
+}
+.coming-soon-cover img,
+.email-detail-attachment .email-attachment .document-file img,
+.email-sender-img img,
+.friend-list .friend-img img,
+.profile-header-img img {
+  max-width: 100%;
+}
+.table.table-profile th {
+  border: none;
+  color: #000;
+  padding-bottom: 0.3125rem;
+  padding-top: 0;
+}
+.table.table-profile td {
+  border-color: #c8c7cc;
+}
+.table.table-profile tbody + thead > tr > th {
+  padding-top: 1.5625rem;
+}
+.table.table-profile .field {
+  color: #666;
+  font-weight: 600;
+  width: 25%;
+  text-align: right;
+}
+.table.table-profile .value {
+  font-weight: 500;
+}
+.profile-header {
+  position: relative;
+  overflow: hidden;
+}
+.profile-header .profile-header-cover {
+  background: url(https://bootdey.com/img/Content/bg1.jpg) center no-repeat;
+  background-size: 100% auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.profile-header .profile-header-cover:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0.85) 100%);
+}
+.profile-header .profile-header-content,
+.profile-header .profile-header-tab,
+.profile-header-img,
+body .fc-icon {
+  position: relative;
+}
+.profile-header .profile-header-tab {
+  background: #fff;
+  list-style-type: none;
+  margin: -1.25rem 0 0;
+  padding: 0 0 0 8.75rem;
+  border-bottom: 1px solid #c8c7cc;
+  white-space: nowrap;
+}
+.profile-header .profile-header-tab > li {
+  display: inline-block;
+  margin: 0;
+}
+.profile-header .profile-header-tab > li > a {
+  display: block;
+  color: #000;
+  line-height: 1.25rem;
+  padding: 0.625rem 1.25rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border: none;
+}
+.profile-header .profile-header-tab > li.active > a,
+.profile-header .profile-header-tab > li > a.active {
+  color: #007aff;
+}
+.profile-header .profile-header-content:after,
+.profile-header .profile-header-content:before {
+  content: "";
+  display: table;
+  clear: both;
+}
+.profile-header .profile-header-content {
+  color: #fff;
+  padding: 1.25rem;
+}
+body .fc th a,
+body .fc-ltr .fc-basic-view .fc-day-top .fc-day-number,
+body .fc-widget-header a {
+  color: #000;
+}
+.profile-header-img {
+  float: left;
+  width: 7.5rem;
+  height: 7.5rem;
+  overflow: hidden;
+  z-index: 10;
+  margin: 0 1.25rem -1.25rem 0;
+  padding: 0.1875rem;
+  -webkit-border-radius: 0.25rem;
+  -moz-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+  background: #fff;
+}
+.profile-header-info h4 {
+  font-weight: 500;
+  margin-bottom: 0.3125rem;
+  margin-top: 2%;
+    font-size: large;
+}
+.profile-container {
+  padding: 1.5625rem;
+}
+@media (max-width: 967px) {
+  .profile-header-img {
+      width: 5.625rem;
+      height: 5.625rem;
+      margin: 0;
   }
-
-  #addfriend-container .button button:nth-child(2) {
-    background: #E8E8E8;
+  .profile-header-info {
+      margin-left: 6.5625rem;
+      padding-bottom: 0.9375rem;
   }
-
-  #addfriend-container .text-name {
-    text-align: center;
-    color: #000;
-    font-family: Inter;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 550;
-    line-height: normal;
-
+  .profile-header .profile-header-tab {
+      padding-left: 0;
   }
-
-  #addfriend-container .text-frrq {
-    color: #000;
-    font-family: Inter;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin: 30px;
+}
+@media (max-width: 767px) {
+  .profile-header .profile-header-cover {
+      background-position: top;
   }
-
-  #addfriend-container .img-icon {
-    width: 35px;
-    height: 35px;
+  .profile-header-img {
+      width: 3.75rem;
+      height: 3.75rem;
+      margin: 0;
   }
-
-  #addfriend-container .left-sidebar ul li::before {
-    content: "";
-    margin-right: 10px;
+  .profile-header-info {
+      margin-left: 4.6875rem;
+      padding-bottom: 0.9375rem;
   }
-
-  #addfriend-container .left-sidebar ul li {
-    display: flex;
-    align-items: center;
+  .profile-header-info h4 {
+      margin: 0 0 0.3125rem;
   }
-
-  #addfriend-container .left-sidebar ul li img {
-    margin-right: 10px;
+  .profile-header .profile-header-tab {
+      white-space: nowrap;
+      overflow: scroll;
+      padding: 0;
   }
-
-  /* Media queries */
-  @media (max-width: 1200px) {
-    #addfriend-container.container {
-      justify-content: flex-start;
-    }
-
-    #addfriend-container .left-sidebar {
-      display: none;
-    }
-
-    #addfriend-container .content {
-      width: 100%;
-      margin-top: 0;
-    }
+  .profile-container {
+      padding: 0.9375rem 0.9375rem 3.6875rem;
   }
-
-  #addfriend-container .logo-icon {
-    margin: 5px !important;
-    ;
-    justify-content: center;
-    align-items: center;
-    display: inline-flex;
-    padding: 7px 13px 10.875px 16px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    background: #587CFB;
+  .friend-list > li {
+      float: none;
+      width: auto;
   }
+}
+.profile-info-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.friend-list,
+.img-grid-list {
+  margin: -1px;
+  list-style-type: none;
+}
+.profile-info-list > li.title {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #8a8a8f;
+  padding: 0 0 0.3125rem;
+}
+.profile-info-list > li + li.title {
+  padding-top: 1.5625rem;
+}
+.profile-info-list > li {
+  padding: 0.625rem 0;
+}
+.profile-info-list > li .field {
+  font-weight: 700;
+}
+.profile-info-list > li .value {
+  color: #666;
+}
+.profile-info-list > li.img-list a {
+  display: inline-block;
+}
+.profile-info-list > li.img-list a img {
+  max-width: 2.25rem;
+  -webkit-border-radius: 2.5rem;
+  -moz-border-radius: 2.5rem;
+  border-radius: 2.5rem;
+}
+.coming-soon-cover img,
+.email-detail-attachment .email-attachment .document-file img,
+.email-sender-img img,
+.friend-list .friend-img img,
+.profile-header-img img {
+  max-width: 100%;
+}
+.table.table-profile th {
+  border: none;
+  color: #000;
+  padding-bottom: 0.3125rem;
+  padding-top: 0;
+}
+.table.table-profile td {
+  border-color: #c8c7cc;
+}
+.table.table-profile tbody + thead > tr > th {
+  padding-top: 1.5625rem;
+}
+.table.table-profile .field {
+  color: #666;
+  font-weight: 600;
+  width: 25%;
+  text-align: right;
+}
+.table.table-profile .value {
+  font-weight: 500;
+}
 
-  #addfriend-container .text-icon {
-    width: 31px;
-    height: 44px;
-    color: #FFF;
-    font-family: Jomhuria;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 1.2px;
-    text-align: center;
-  }
-
-  #addfriend-container .text-h2 {
-    margin-top: 8px;
-    text-align: center;
-
-  }
-
-  #addfriend-container .search-bar {
-
-    display: inline-flex;
-    padding: 11px 60px 11px 12px;
-    align-items: flex-end;
-    gap: 15px;
-    border-radius: 43px;
-    background: #E8E8E8;
-
-  }
-
-  #addfriend-container .button-container {
-    margin-left: 150px;
-    display: flex;
-    gap: 15px;
-  }
-
-  #addfriend-container .home-button {
-    border: none;
-    margin-right: 45px;
-  }
-
-  #addfriend-container .button-container1 {
-    display: flex;
-    gap: 15px;
-  }
-
-  #addfriend-container .home-button1 {
-    border: none;
-    margin-right: 45px;
-  }
-
-  #addfriend-container .ui.link.cards .card .header,
-  .ui.link.cards .card .meta {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  #addfriend-container .ui.link.card {
-    flex-basis: calc(33.33% - 10px);
-    /* Độ rộng của mỗi thẻ (33.33% của không gian cha với khoảng cách là 10px) */
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    /* Đảm bảo rằng padding và border không làm tăng kích thước thực tế */
-  }
-
-  #addfriend-container.ui.link.cards .card {
-    width: 100%;
-    height: 425px;
-  }
-
-  #addfriend-container .ui {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  #addfriend-container .four-wide-column {
-    display: flex;
-    /* Sử dụng flexbox để hiển thị các phần tử con ngang nhau */
-    flex-wrap: wrap;
-    /* Cho phép các phần tử con tự xuống dòng khi không đủ không gian */
-    justify-content: center;
-    flex: 0 1 calc(25% - 10px);
-    /* Giới hạn mỗi phần tử trên mỗi dòng là 4 */
-    margin-bottom: 10px;
-    /* Khoảng cách giữa các phần tử */
-  }
-
-  @media (max-width: 767px) {
-    #addfriend-container .top-menu {
-      display: none;
-    }
-
-    #addfriend-container .card {
-      width: 100%;
-      align-items: center;
-    }
-  }
+.friend-list {
+  padding: 0;
+}
+.friend-list > li {
+  float: left;
+  width: 100%;
+}
+.friend-list > li > a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  padding: 0.625rem;
+  margin: 1px;
+  background: #fff;
+}
+.friend-list > li > a:after,
+.friend-list > li > a:before {
+  content: "";
+  display: table;
+  clear: both;
+}
+.friend-list .friend-img {
+  float: left;
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+  background: #efeff4;
+}
+.friend-list .friend-info {
+  margin-left: 3.625rem;
+}
+.friend-list .friend-info h4 {
+  margin: 0.3125rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.friend-list .friend-info p {
+  color: #666;
+  margin: 0;
+}
