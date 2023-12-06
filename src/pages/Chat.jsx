@@ -2,18 +2,18 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import { connectSocket, socket } from "../socket";
+import { useCallback } from "react";
 
 export default function Chat() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [userEmail, setUserEmail] = useState(undefined);
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -25,12 +25,15 @@ export default function Chat() {
     }
   }, [navigate]);
 
-  console.log("currentUser", currentUser);
   useEffect(() => {
     if (!socket) {
-      connectSocket("653385a8a95841abc1b58eee"); // login thành công lấy id của user thay vào
+      connectSocket(userId); // login thành công lấy id của user thay vào
+      console.log(socket)
     }
-  }, [currentUser, socket]);
+  }, [userId]);
+
+  // Test gửi yêu cầu kết bạn tới tài khoản quocan@gmail.com
+  
 
   // useEffect(async () => {
   //   if (currentUser) {

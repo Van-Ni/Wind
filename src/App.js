@@ -7,7 +7,6 @@ import SetAvatar from "./components/SetAvatar";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AddFriend from "./components/AddFriend/AddFriend"
 import Profiles from "./pages/profiles/Profiles";
 import EditProfiles from "./pages/profiles/EditProfiles"
 import Request from "./components/Friend/Request";

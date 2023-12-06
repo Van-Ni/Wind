@@ -17,7 +17,6 @@ export const login = (email, password) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         dispatch({
           type: "LOGIN",
           payload: {
@@ -25,6 +24,7 @@ export const login = (email, password) => {
             status: data.status,
             token: data.token,
             message: data.message,
+            userId: data.user_id,
           },
         });
       })

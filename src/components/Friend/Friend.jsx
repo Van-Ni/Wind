@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import IconRq from "../../assets/img/frreqindex.jpg";
@@ -11,6 +11,7 @@ import NofiIcon from "../../assets/img/nofi.jpg";
 import MenuIcon from "../../assets/img/menu.jpg";
 import AvtIcon from "../../assets/img/avt.jpg";
 import DefaultAvt from "../../assets/img/default.jpg"
+import { connectSocket, socket } from "../../socket";
 
 import { getFriendsRoute } from "../../utils/APIRoutes"
 
@@ -22,6 +23,7 @@ function Friend() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
   const [showDropdown, setShowDropdown] = useState(false);
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
 
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
@@ -42,7 +44,7 @@ function Friend() {
     const endIndex = startIndex + productsPerPage;
     return friendrequest.slice(startIndex, endIndex);
   }, [friendrequest]);
-  console.log("a"+displayedFRRS)
+  // console.log("a"+displayedFRRS)
 
 
 
@@ -81,9 +83,34 @@ function Friend() {
     }
   }, []);
 
-  console.log(friendrequest)
+  // console.log(friendrequest)
 
   const { firstName, lastName, _id } = displayedFRRS[0]?.sender || {};
+
+  // Connect socket
+  useEffect(() => {
+    if (!socket) {
+      connectSocket(userId); // login thành công lấy id của user thay vào
+      console.log(socket)
+    }
+  }, [userId]);
+  // Gửi sự kiện yêu cầu kết bạn
+  const testYeuCauKetBan = useCallback(() => {
+    socket.emit("friend_request", {
+      to: "65508d6a73ad8e1036a91091", // Id của tài khoản quocan@gmail.com
+      from: userId
+    }, (response) => {
+      console.log(response.status)
+    })
+  }, [userId])
+  // Nhận sự kiện request_sent và trả về message
+  useEffect(() => {
+    if (socket) {
+      socket.on("request_sent", (response) => {
+        console.log(response);
+      });
+    }
+  }, [socket]);
   
   return (
    <>
@@ -192,7 +219,7 @@ function Friend() {
           </div>
           <div className="text-name">{`${firstName} ${lastName}`}</div>
           <div className="button">
-            <button>Add Friend</button>
+            <button onClick={testYeuCauKetBan}>Add Friend</button>
             <button>Delete</button>
           </div>
         </div>
