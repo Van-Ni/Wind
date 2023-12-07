@@ -446,7 +446,7 @@ body .fc-widget-header a {
 .profile-header-info h4 {
   font-weight: 500;
   margin-bottom: 0.3125rem;
-  margin-top: 2%;
+  margin-top: 5%;
     font-size: large;
 }
 .profile-container {
@@ -561,12 +561,17 @@ body .fc-widget-header a {
   font-weight: 500;
 }
 
+.row {
+  flex: none !important;
+}
+
 .friend-list {
   padding: 0;
 }
 .friend-list > li {
+
   float: left;
-  width: 100%;
+  width: 50%;
 }
 .friend-list > li > a {
   display: block;
@@ -600,4 +605,10 @@ body .fc-widget-header a {
 .friend-list .friend-info p {
   color: #666;
   margin: 0;
+}
+.mb-4 {
+  height: 7em !important;
+  border-bottom: 5px solid #eee;
+  height: 150px !important;
+  width: 155px;
 }
