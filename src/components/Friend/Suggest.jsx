@@ -11,7 +11,7 @@ function Suggest() {
   const [firstName2, setFirstName2] = useState('');
   const [lastName2, setLastName2] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 20;
+  const productsPerPage = 18;
   const [showDropdown, setShowDropdown] = useState(false);
   const [avatars, setAvatars] = useState('')
   const imageUrls = [
@@ -25,7 +25,11 @@ function Suggest() {
     "https://bootdey.com/img/Content/avatar/avatar1.png"
   ];
   const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]; 
+  const [displayedFriendsCount, setDisplayedFriendsCount] = useState(productsPerPage);
 
+  const handleMoreButtonClick = () => {
+    setDisplayedFriendsCount((prevCount) => prevCount + productsPerPage);
+  };
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
@@ -33,18 +37,15 @@ function Suggest() {
   const handleOptionClick = () => {
     // Handle option click if needed
   };
-
-  const displayedFRRS = useMemo(() => {
-    // Kiểm tra nếu friendrequest không phải là một mảng
+const displayedFRRS = useMemo(() => {
+      // Kiểm tra nếu friendrequest không phải là một mảng
     if (!Array.isArray(friendrequest)) {
-      return []; // Trả về một mảng rỗng hoặc giá trị mặc định tương ứng
+      return [];
     }
-    
-    // Tính toán danh sách sản phẩm hiển thị trên trang
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    return friendrequest.slice(startIndex, endIndex);
-  }, [friendrequest]);
+    //Tính toán danh sách hiển thị trên trang
+    const endIndex = Math.min(displayedFriendsCount, friendrequest.length);
+    return friendrequest.slice(0, endIndex);
+  }, [friendrequest, displayedFriendsCount]);
 
   // Connect socket
   useEffect(() => {
@@ -154,7 +155,7 @@ function Suggest() {
         </div>
    
         <div className="profile-container">
-          <div className="row row-space-20">
+          <div className="row-space-20">
             <div className="col-md-8">
               <div className="tab-content p-0">
                 <div className="tab-pane fade active show" id="profile-friends">
@@ -183,9 +184,17 @@ function Suggest() {
                       }
                     })}
                   </ul>
+                 
                 </div>
+                
               </div>
+              
             </div>
+            {displayedFriendsCount < friendrequest.length && (
+                  <button onClick={handleMoreButtonClick} className="btn btn-primary">
+                    More
+                  </button>
+                )}
           </div>
         </div>
       </div>

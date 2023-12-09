@@ -60,7 +60,7 @@ useEffect(() => {
 // Gửi sự kiện yêu cầu kết bạn
 const testYeuCauKetBan = useCallback((idRequest) => {
   console.log('Accept button clicked for ID:', idRequest);
-  console.log('Accept button id me*', userId)
+  console.log('Accept button id me', userId)
 
   socket.emit("accept_request", {
     request_id: idRequest,
@@ -173,15 +173,16 @@ return (
   // Kiểm tra xem request và sender có tồn tại không
   if (request && request.sender) {
     const { firstName, lastName, _id } = request.sender; // Access sender property
-   
+    const idRequest = request._id
+    console.log(idRequest)
     const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
     return (
-      <li key={_id}>
+      <li key={idRequest}>
         <a href="#">
           <div className="friend-img"><img src={randomImageUrl} alt="" /></div>
           <div className="friend-info">
             <h4>{`${firstName} ${lastName}`}</h4>
-            <button onClick={() => testYeuCauKetBan(_id)} id="acceptButton">Accept</button>
+            <button onClick={() => testYeuCauKetBan(idRequest)} id="acceptButton">Accept</button>
           </div>
         </a>
       </li>
