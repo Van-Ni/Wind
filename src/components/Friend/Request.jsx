@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo,useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import io from 'socket.io-client';
-import socketio from "socket.io-client";
 import { connectSocket, socket } from "../../socket";
 import { getRequestsRoute } from "../../utils/APIRoutes"
 
@@ -54,13 +52,18 @@ const displayedFRRS = useMemo(() => {
 useEffect(() => {
   if (!socket) {
     connectSocket(userId); // login thành công lấy id của user thay vào
-  }
+  } 
+  console.log('Connect', socket);
 }, [userId]);
 
+
 // Gửi sự kiện yêu cầu kết bạn
-const testYeuCauKetBan = useCallback((toUserId) => {
+const testYeuCauKetBan = useCallback((idRequest) => {
+  console.log('Accept button clicked for ID:', idRequest);
+  console.log('Accept button id me*', userId)
+
   socket.emit("accept_request", {
-    request_id: toUserId,
+    request_id: idRequest,
     sender: userId,
     recipient: userId
   }, (response) => {
@@ -145,7 +148,7 @@ return (
  
           <div className="profile-header-info">
             <h4 class="m-t-sm">{`${firstName2} ${lastName2}`}</h4>
-            <a href="#" className="btn btn-xs btn-primary mb-2">Edit Profile</a>
+            <a href="/editprofiles" className="btn btn-xs btn-primary mb-2">Edit Profile</a>
           </div>
         </div>
  

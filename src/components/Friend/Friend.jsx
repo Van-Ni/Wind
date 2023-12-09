@@ -128,7 +128,7 @@ function Friend() {
               <div class="profile-header-info">
                 <h4 class="m-t-sm">{`${firstName2} ${lastName2}`}</h4>
 
-                <a href="#" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
+                <a href="/editprofiles" class="btn btn-xs btn-primary mb-2">Edit Profile</a>
               </div>
             </div>
 
@@ -162,7 +162,7 @@ function Friend() {
                                 <div class="friend-img"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></div>
                                 <div class="friend-info">
                                   <h4>{`${firstName} ${lastName}`}</h4>
-                                  <p>Message</p>
+                                  <a href="./" >Message</a>
                                 </div>
                               </a>
                             </li>
