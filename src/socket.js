@@ -1,9 +1,10 @@
 import io from "socket.io-client"; 
+import { host } from "./utils/APIRoutes"
 
 let socket;
 
 const connectSocket = (user_id) => {
-  socket = io("http://localhost:3001", {
+  socket = io(host, {
     query: `user_id=${user_id}`,
   });
 } 

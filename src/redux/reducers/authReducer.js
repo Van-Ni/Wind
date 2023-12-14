@@ -10,6 +10,7 @@ const authReducer = (state = initialState, action) => {
                 status: action.payload.status,
                 token: action.payload.token,
                 message: action.payload.message,
+                userId: action.payload.userId
             };
         case 'REGISTER':
             // Xử lý đăng ký thành công, cập nhật trạng thái loggedIn và user
