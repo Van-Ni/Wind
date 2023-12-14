@@ -14,26 +14,34 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
-
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
-        navigate('/login');
-      })
+        navigate("/login");
+      });
     } else {
       setCurrentUser(sessionStorage.getItem("email"));
     }
   }, [navigate]);
 
+  // Connect socket
   useEffect(() => {
     if (!socket) {
       connectSocket(userId); // login thành công lấy id của user thay vào
-      console.log(socket)
     }
   }, [userId]);
-
-  // Test gửi yêu cầu kết bạn tới tài khoản quocan@gmail.com
-  
+  // Gửi sự kiện yêu cầu kết bạn
+  useEffect(() => {
+    socket.emit(
+      "get_direct_conversations",
+      {
+        user_id: userId,
+      },
+      (response) => {
+        setContacts(response);
+      }
+    );
+  }, [userId]);
 
   // useEffect(async () => {
   //   if (currentUser) {
@@ -72,7 +80,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: rgb(229, 239, 255);;
+  background-color: rgb(229, 239, 255);
   .container {
     height: 85vh;
     width: 85vw;

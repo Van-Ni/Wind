@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import Logo from "../assets/img/logo.svg";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -57,7 +56,7 @@ export default function Contacts({ contacts, changeChat }) {
             <h3>Wind</h3>
           </div>
           <div className="contacts">
-            {Contacts.map((contact, index) => {
+            {contacts.map((contact, index) => {
               return (
                 <div
                   key={contact._id}
@@ -65,14 +64,14 @@ export default function Contacts({ contacts, changeChat }) {
                     }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                  <div className="avatar">
+                  {/* <div className="avatar">
                     <img
-                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                      src={contact.participants[0].avatar.url}
                       alt=""
                     />
-                  </div>
+                  </div> */}
                   <div className="username">
-                    <h3>{contact.username}</h3>
+                    <h3>{`${contact.participants[0].lastName} ${contact.participants[0].firstName}`}</h3>
                   </div>
                 </div>
               );
