@@ -4,12 +4,14 @@ import ChatInput from "./ChatInput";
 import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
 import { socket } from "../socket";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatContainer({ currentChat }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     socket.emit(
@@ -75,7 +77,13 @@ export default function ChatContainer({ currentChat }) {
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
+        {/* <Logout /> */}
+        <button
+          onClick={() => navigate("/friend")}
+          className="btn btn-xs btn-primary mb-2"
+        >
+          Back
+        </button>
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
@@ -154,10 +162,13 @@ const Container = styled.div`
       .content {
         max-width: 40%;
         overflow-wrap: break-word;
-        padding: 1rem;
-        font-size: 11px;
+        padding: 7px;
+        font-size: 14px;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: rgb(0, 0, 0);
+        p {
+          margin-bottom: 0;
+        }
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }

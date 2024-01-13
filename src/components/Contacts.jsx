@@ -1,11 +1,27 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
   const [userEmail, setUserEmail] = useState(undefined);
+  const location = useLocation();
+  const { state } = location;
+
+  useEffect(() => {
+    if (state && state.id) {
+      const index = contacts.findIndex(
+        (item) => item.participants[0]._id === state.id
+      );
+      const contact = contacts.find(
+        (item) => item.participants[0]._id === state.id
+      );
+      setCurrentSelected(index);
+      changeChat(contact);
+    }
+  }, [state, contacts]);
 
   useEffect(async () => {
     const data = await JSON.parse(
@@ -13,7 +29,7 @@ export default function Contacts({ contacts, changeChat }) {
     );
     const storedData = {
       username: userEmail,
-      avatarImage: "dummy-avatar-image"
+      avatarImage: "dummy-avatar-image",
     };
     setCurrentUserName(storedData.username);
     setCurrentUserImage(storedData.avatarImage);
@@ -21,32 +37,14 @@ export default function Contacts({ contacts, changeChat }) {
 
   useEffect(() => {
     if (sessionStorage.getItem("email")) {
-      setUserEmail(sessionStorage.getItem("email"))
-    } 
-  }, [])
+      setUserEmail(sessionStorage.getItem("email"));
+    }
+  }, []);
 
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
   };
-  // Dummy contacts data
-  const Contacts = [
-    {
-      _id: 1,
-      avatarImage: "dummy-avatar-image-1",
-      username: "User 1"
-    },
-    {
-      _id: 2,
-      avatarImage: "dummy-avatar-image-2",
-      username: "User 2"
-    },
-    {
-      _id: 3,
-      avatarImage: "dummy-avatar-image-3",
-      username: "User 3"
-    }
-  ];
   return (
     <>
       {currentUserImage && currentUserImage && (
@@ -60,8 +58,9 @@ export default function Contacts({ contacts, changeChat }) {
               return (
                 <div
                   key={contact._id}
-                  className={`contact ${index === currentSelected ? "selected" : ""
-                    }`}
+                  className={`contact ${
+                    index === currentSelected ? "selected" : ""
+                  }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
                   {/* <div className="avatar">

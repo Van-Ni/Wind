@@ -14,6 +14,8 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
+  
+
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
@@ -27,10 +29,10 @@ export default function Chat() {
   // Connect socket
   useEffect(() => {
     if (!socket) {
-      connectSocket(userId); // login thành công lấy id của user thay vào
+      connectSocket(userId);
     }
   }, [userId]);
-  // Gửi sự kiện yêu cầu kết bạn
+  // Gửi sự kiện lấy tin nhắn
   useEffect(() => {
     socket.emit(
       "get_direct_conversations",
