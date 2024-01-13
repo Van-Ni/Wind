@@ -71,21 +71,21 @@ const Profiles = () => {
     <div id="profiles-container" className="container">
       <section className="mx-auto my-5" style={{ maxWidth: "23rem" }}>
         <div className="card testimonial-card mt-2 mb-3">
-          <div className="tag-title">
+          {/* <div className="tag-title">
             <label>Account Information</label>
+          </div> */}
+          <div className="card-up aqua-gradient">
             <i
               onClick={() => navigate("/friend")}
-              className="fa-solid fa-xmark"
+              className="icon-close fa-solid fa-xmark"
             ></i>
           </div>
-          <hr style={{ margin: "0" }} />
-          <div className="card-up aqua-gradient"></div>
           <div className="avatar mx-auto white">
             <img
               style={{
                 width: "100%",
                 height: "115px",
-                "object-fit": "cover",
+                objectFit: "fill",
               }}
               src={userData.avatar}
               className="rounded-circle img-fluid"
@@ -100,7 +100,7 @@ const Profiles = () => {
                 </h4>
                 <hr />
                 <div className="personal-info-container">
-                  <h3 className="personal-info-title">Personal Information</h3>
+                  <h4 className="personal-info-title">Personal Information</h4>
                   <div className="info-row">
                     <label className="info-label">Phone:</label>
                     <input
@@ -120,7 +120,7 @@ const Profiles = () => {
                     />
                   </div>
                   <div className="info-row">
-                    <label className="info-label">Date of Birth:</label>
+                    <label className="info-label">Birthday:</label>
                     <input
                       type="text"
                       defaultValue={userData.dateOfBirth}
@@ -128,9 +128,9 @@ const Profiles = () => {
                       readOnly
                     />
                   </div>
-                  <Link to="/editProfiles" className="update-button">
+                  <a href="/editProfiles" className="btn btn-xs btn-primary">
                     Update Information
-                  </Link>
+                  </a>
                 </div>
               </div>
             )}

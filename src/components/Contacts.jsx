@@ -77,12 +77,9 @@ export default function Contacts({ contacts, changeChat }) {
             })}
           </div>
           <div className="current-user">
-            {/* <div className="avatar">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-              />
-            </div> */}
+            <div className="avatar">
+              <img src={`${sessionStorage.getItem("avatar")}`} alt="avatar" />
+            </div>
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
@@ -117,7 +114,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    // overflow: auto;
     gap: 0.8rem;
     &::-webkit-scrollbar {
       width: 0.2rem;
@@ -131,16 +128,15 @@ const Container = styled.div`
       background-color: #fff;
       min-height: 55px;
       cursor: pointer;
-      width: 90%;
+      width: 100%;
       border-radius: 0.2rem;
-      padding: 4px;
+      padding: 20px;
       display: flex;
       gap: 1rem;
       align-items: center;
       transition: 0.5s ease-in-out;
       .avatar {
         img {
-          height: 3rem;
         }
       }
       .username {
@@ -160,11 +156,14 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 8px;
     .avatar {
       img {
-        height: 4rem;
-        max-inline-size: 100%;
+        object-fit: fill;
+        max-width: 100%;
+        border-radius: 62px;
+        width: 45px;
+        height: 45px;
       }
     }
     .username {

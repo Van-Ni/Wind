@@ -339,6 +339,7 @@ body{
 .friend-list .friend-img img,
 .profile-header-img img {
   max-width: 100%;
+  border-radius: 24px;
 }
 .table.table-profile th {
   border: none;
@@ -393,8 +394,8 @@ body .fc-icon {
   background: #fff;
   list-style-type: none;
   margin: -1.25rem 0 0;
-  padding: 0 0 0 8.75rem;
-  border-bottom: 1px solid #c8c7cc;
+  /* padding: 0 0 0 8.75rem; */
+  /* border-bottom: 1px solid #c8c7cc; */
   white-space: nowrap;
 }
 .profile-header .profile-header-tab > li {
@@ -408,12 +409,13 @@ body .fc-icon {
   padding: 0.625rem 1.25rem;
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 13px;
   border: none;
 }
 .profile-header .profile-header-tab > li.active > a,
 .profile-header .profile-header-tab > li > a.active {
   color: #007aff;
+  border-bottom: 2px solid #007aff;
 }
 .profile-header .profile-header-content:after,
 .profile-header .profile-header-content:before {
@@ -437,11 +439,12 @@ body .fc-widget-header a {
   overflow: hidden;
   z-index: 10;
   margin: 0 1.25rem -1.25rem 0;
-  padding: 0.1875rem;
+  /* padding: 0.1875rem; */
   -webkit-border-radius: 60px;
   -moz-border-radius: 60px;
   border-radius: 60px;
   /* background: #fff; */
+  border: 2px solid #eaeaea;
 }
 .profile-header-info h4 {
   font-weight: 500;
@@ -450,7 +453,7 @@ body .fc-widget-header a {
     font-size: large;
 }
 .profile-container {
-  padding: 1.5625rem;
+  padding: 1.5625rem 0;
 }
 @media (max-width: 967px) {
   .profile-header-img {
@@ -588,9 +591,13 @@ body .fc-widget-header a {
   height: 3rem;
   overflow: hidden;
   background: #efeff4;
+  border-radius: 24px;
 }
 .friend-list .friend-info {
   margin-left: 3.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .friend-list .friend-info h4 {
   margin: 0.3125rem 0;

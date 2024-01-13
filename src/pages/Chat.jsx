@@ -14,7 +14,6 @@ export default function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
-  
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -89,6 +88,7 @@ const Container = styled.div`
     background-color: #3b71ca;
     display: grid;
     grid-template-columns: 25% 75%;
+    padding: 0;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-columns: 35% 65%;
     }

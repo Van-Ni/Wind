@@ -23,7 +23,6 @@
   width: 100px;
   display: flex;
   justify-content: flex-start !important;
-  margin-bottom: 10px;
 }
 
 #profiles-container .info-value {
@@ -37,35 +36,42 @@
   justify-content: space-between;
   padding: 0 7px;
   font-size: 20px;
+  /* background-color: #1877f2; */
+}
+
+#profiles-container .tag-title label {
+  font-size: 14px;
 }
 
 #profiles-container .update-button {
+  display: block;
   height: 30px;
   width: 90%;
   margin-top: 10px;
   background-color: #1877f2;
   border-radius: 5px;
   color: #fff;
+  text-decoration: none;
 }
-
 
 body {
   background-color: #f5f7fa;
 }
 
 #profiles-container h4 {
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
 #profiles-container .testimonial-card .card-up {
   height: 120px;
   overflow: hidden;
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
+  /* border-top-left-radius: .25rem; */
+  /* border-top-right-radius: .25rem; */
 }
 
 #profiles-container .aqua-gradient {
-  background: linear-gradient(40deg, #2096ff, #523ad9) !important;
+  background: url(https://bootdey.com/img/Content/bg1.jpg) center no-repeat;
+  background-size: 100% auto;
 }
 
 #profiles-container .testimonial-card .avatar {
@@ -74,4 +80,18 @@ body {
   overflow: hidden;
   border: 5px solid #fff;
   border-radius: 50%;
+}
+
+.icon-close {
+  color: #fff;
+  position: absolute;
+  right: 0;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 24px;
+}
+
+.icon-close:hover {
+  background-color: rgba(255, 99, 71, 0.2);
 }
