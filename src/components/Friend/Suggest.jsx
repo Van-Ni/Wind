@@ -166,11 +166,18 @@ function Suggest() {
 
                 <div style={{ display: "flex" }}>
                   <a
-                    href="#"
+                    href="/profiles"
                     className="btn btn-xs btn-primary"
                     style={{ marginRight: "6px" }}
                   >
-                    Edit Profile
+                    Details
+                  </a>
+                  <a
+                    href="/"
+                    className="btn btn-xs btn-primary"
+                    style={{ marginRight: "6px" }}
+                  >
+                    Messages
                   </a>
                   <Logout />
                 </div>
@@ -243,7 +250,10 @@ function Suggest() {
                                 </div>
                                 <div className="friend-info">
                                   <h4>{`${firstName} ${lastName}`}</h4>
-                                  <button onClick={() => sendRequest(_id)} className="btn btn-xs btn-primary mb-2">
+                                  <button
+                                    onClick={() => sendRequest(_id)}
+                                    className="btn btn-xs btn-primary mb-2"
+                                  >
                                     Add Friend
                                   </button>
                                 </div>

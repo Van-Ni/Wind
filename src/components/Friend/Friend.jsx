@@ -167,8 +167,11 @@ function Friend() {
               <div className="profile-header-info">
                 <h4 className="m-t-sm">{`${firstName2} ${lastName2}`}</h4>
                 <div style={{display:"flex"}}>
-                  <a href="#" className="btn btn-xs btn-primary" style={{"marginRight": "6px"}}>
-                    Edit Profile
+                  <a href="/profiles" className="btn btn-xs btn-primary" style={{"marginRight": "6px"}}>
+                    Details
+                  </a>
+                  <a href="/" className="btn btn-xs btn-primary" style={{"marginRight": "6px"}}>
+                    Messages
                   </a>
                   <Logout />
                 </div>
@@ -245,7 +248,7 @@ function Friend() {
                                     onClick={() => startChatting(_id)}
                                     className="btn btn-xs btn-primary mb-2"
                                   >
-                                    Message
+                                    Chat
                                   </button>
                                 </div>
                               </a>

@@ -151,11 +151,18 @@ function Request() {
 
                 <div style={{ display: "flex" }}>
                   <a
-                    href="#"
+                    href="/profiles"
                     className="btn btn-xs btn-primary"
                     style={{ marginRight: "6px" }}
                   >
-                    Edit Profile
+                    Details
+                  </a>
+                  <a
+                    href="/"
+                    className="btn btn-xs btn-primary"
+                    style={{ marginRight: "6px" }}
+                  >
+                    Messages
                   </a>
                   <Logout />
                 </div>
@@ -229,7 +236,9 @@ function Request() {
                                 <div className="friend-info">
                                   <h4>{`${firstName} ${lastName}`}</h4>
                                   <button
-                                    onClick={() => acceptRequest(_id, requestId)}
+                                    onClick={() =>
+                                      acceptRequest(_id, requestId)
+                                    }
                                     id="acceptButton"
                                     className="btn btn-xs btn-primary mb-2"
                                   >

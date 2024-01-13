@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from "react-router-dom";
 
 const Profiles = () => {
-
   // Khởi tạo userData với các thuộc tính mặc định là chuỗi rỗng
   const [userData, setUserData] = useState({
-    fullname: '',
-    avatar: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.6435-9/190108336_322648402555040_2100790391455013605_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=be3454&_nc_ohc=5M6dc--QEiUAX-e7CiS&_nc_ht=scontent.fhan4-1.fna&oh=00_AfAs7VU4nQ2aIxiVK-q8HqkgD5bEprMEYMe1ZRK4F3JQJg&oe=6584D480',
-    phone: '0371233559',
-    gender: 'Male',
-    dateOfBirth: '20/10/2000',
+    fullname: "",
+    avatar: "",
+    phone: "",
+    gender: "",
+    dateOfBirth: "",
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserData()
@@ -22,15 +22,15 @@ const Profiles = () => {
         setUserData(data);
       })
       .catch((error) => {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
       });
   }, []);
 
-  // if (!sessionStorage.getItem("token")) {
-  //   setTimeout(() => {
-  //     navigate("/login");
-  //   });
-  // }
+  if (!sessionStorage.getItem("token")) {
+    setTimeout(() => {
+      navigate("/login");
+    });
+  }
 
   const fetchUserData = async () => {
     try {
@@ -39,13 +39,13 @@ const Profiles = () => {
       const response = await fetch("https://wind-be.onrender.com/user/get-me", {
         method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch user data');
+        throw new Error("Failed to fetch user data");
       }
 
       // Chuyển đổi dữ liệu từ JSON
@@ -53,35 +53,38 @@ const Profiles = () => {
       const fullname = `${data.data.firstName} ${data.data.lastName}`;
       return {
         fullname: fullname,
-        phone: '0371233559',
-        gender: 'Male',
-        dateOfBirth: '20/10/2000',
-        avatar: data.data.avatar.url
+        phone: "0371233559",
+        gender: "Male",
+        dateOfBirth: "20/10/2000",
+        avatar: data.data.avatar.url,
       };
       // console.log(data)
 
       // Trả về dữ liệu người dùng từ API
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error("Error fetching user data:", error);
       throw error;
     }
   };
 
   return (
     <div id="profiles-container" className="container">
-      <section className="mx-auto my-5" style={{ maxWidth: '23rem' }}>
+      <section className="mx-auto my-5" style={{ maxWidth: "23rem" }}>
         <div className="card testimonial-card mt-2 mb-3">
           <div className="tag-title">
             <label>Account Information</label>
-            <i className="fa-solid fa-xmark"></i>
+            <i
+              onClick={() => navigate("/friend")}
+              className="fa-solid fa-xmark"
+            ></i>
           </div>
-          <hr style={{ "margin": "0" }} />
+          <hr style={{ margin: "0" }} />
           <div className="card-up aqua-gradient"></div>
           <div className="avatar mx-auto white">
             <img
               style={{
-                "width": "100%",
-                "height": "115px",
+                width: "100%",
+                height: "115px",
                 "object-fit": "cover",
               }}
               src={userData.avatar}
@@ -92,7 +95,9 @@ const Profiles = () => {
           <div className="card-body text-center">
             {userData && (
               <div>
-                <h4 className="card-title font-weight-bold">{userData.fullname}</h4>
+                <h4 className="card-title font-weight-bold">
+                  {userData.fullname}
+                </h4>
                 <hr />
                 <div className="personal-info-container">
                   <h3 className="personal-info-title">Personal Information</h3>
@@ -123,7 +128,9 @@ const Profiles = () => {
                       readOnly
                     />
                   </div>
-                  <Link to="/editProfiles" className="update-button">Update Information</Link>
+                  <Link to="/editProfiles" className="update-button">
+                    Update Information
+                  </Link>
                 </div>
               </div>
             )}
