@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+body {
+  background-color: #f5f7fa;
+}
+
+.update-information-form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.update-information-form .form-group {
+  margin-bottom: 15px;
+}
+
+/* h4 {
+  font-size: 16px;
+  margin-left: 20px; 
+} */
+
+.update-information-form h4, .content_personal {
+  font-size: 16px;
+  margin-left: 20px; 
+}
+
+.update-information-form .form-control {
+  width: calc(100% - 40px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.update-information-form .edit-hr {
+  border: 4px solid;
+}
+
+.update-information-form .testimonial-card .card-up {
+  height: 120px;
+  overflow: hidden;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+
+.update-information-form .aqua-gradient {
+  background: linear-gradient(40deg, #2096ff, #523ad9) !important;
+}
+
+.update-information-form .testimonial-card .avatar {
+  width: 120px;
+  margin-top: -60px;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 50%;
+}
+
+.update-information-form .tag-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 20px 0;
+}
+
+.update-information-form .tag-title label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.update-information-form .fa-xmark {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: rgb(2, 2, 2);
+}
+
+.update-information-form .form-group label.dob {
+  margin-left: 20px;
+}
+
+.update-information-form .form-group input[type="radio"] {
+  margin-left: 20px;
+}
+
+.update-information-form .form-btn {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.update-information-form .btn {
+  margin-right: 10px;
+  margin-top: 10px;
+}

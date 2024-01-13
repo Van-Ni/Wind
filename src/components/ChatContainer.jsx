@@ -3,49 +3,43 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
-import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import { socket } from "../socket";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatContainer({ currentChat }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-
-  useEffect(async () => {
-    const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    );
-    const response = await axios.post(recieveMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
-    });
-    setMessages(response.data);
-  }, [currentChat]);
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const getCurrentChat = async () => {
-      if (currentChat) {
-        await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-        )._id;
+    socket.emit(
+      "get_messages",
+      {
+        conversation_id: currentChat._id,
+      },
+      (response) => {
+        const chatHistory = [];
+        response.map((msg) => {
+          if (msg.from === userId) {
+            chatHistory.push({ fromSelf: true, message: msg.text });
+          } else {
+            chatHistory.push({ fromSelf: false, message: msg.text });
+          }
+        });
+        setMessages(chatHistory);
       }
-    };
-    getCurrentChat();
+    );
   }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
-    const data = await JSON.parse(
-      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    );
-    // socket.current.emit("send-msg", {
-    //   to: currentChat._id,
-    //   from: data._id,
-    //   msg,
-    // });
-    await axios.post(sendMessageRoute, {
-      from: data._id,
-      to: currentChat._id,
+    socket.emit("text_message", {
       message: msg,
+      conversation_id: currentChat._id,
+      from: userId,
+      to: currentChat.participants[0]._id,
+      type: "Text",
     });
 
     const msgs = [...messages];
@@ -54,11 +48,11 @@ export default function ChatContainer({ currentChat }) {
   };
 
   useEffect(() => {
-    // if (socket.current) {
-    //   socket.current.on("msg-recieve", (msg) => {
-    //     setArrivalMessage({ fromSelf: false, message: msg });
-    //   });
-    // }
+    if (socket.current) {
+      socket.current.on("new_message", (msg) => {
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -83,15 +77,22 @@ export default function ChatContainer({ currentChat }) {
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
+        {/* <Logout /> */}
+        <button
+          onClick={() => navigate("/friend")}
+          className="btn btn-xs btn-primary mb-2"
+        >
+          Back
+        </button>
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
-                className={`message ${message.fromSelf ? "sended" : "recieved"
-                  }`}
+                className={`message ${
+                  message.fromSelf ? "sended" : "recieved"
+                }`}
               >
                 <div className="content ">
                   <p>{message.message}</p>
@@ -107,9 +108,9 @@ export default function ChatContainer({ currentChat }) {
 }
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   grid-template-rows: 10% 80% 10%;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -161,10 +162,13 @@ justify-content: space-between;
       .content {
         max-width: 40%;
         overflow-wrap: break-word;
-        padding: 1rem;
-        font-size: 11px;
+        padding: 7px;
+        font-size: 14px;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: rgb(0, 0, 0);
+        p {
+          margin-bottom: 0;
+        }
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }

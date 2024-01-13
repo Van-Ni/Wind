@@ -18,6 +18,8 @@ export default function Login() {
   const navigate = useNavigate();
   const token = useSelector(state => state.authReducer.token);
   const message = useSelector(state => state.authReducer.message);
+  const userId = useSelector(state => state.authReducer.userId);
+  const status = useSelector(state => state.authReducer.status)
 
   // Login
   useEffect(() => {
@@ -30,11 +32,12 @@ export default function Login() {
 
   // Set token and navigate to friends list
   useEffect(() => {
-    if (token) {
+    if (status == "success") {
       sessionStorage.setItem("token", token);
+      sessionStorage.setItem("userId", userId);
       navigate("/friend");
     }
-  }, [token, navigate])
+  }, [status, navigate])
 
   // Auto navigate to chat when token is exist in session
   useEffect(() => {

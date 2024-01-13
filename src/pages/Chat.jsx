@@ -2,35 +2,48 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import { connectSocket, socket } from "../socket";
+import { useCallback } from "react";
 
 export default function Chat() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [userEmail, setUserEmail] = useState(undefined);
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
+  
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
       setTimeout(() => {
-        navigate('/login');
-      })
+        navigate("/login");
+      });
     } else {
       setCurrentUser(sessionStorage.getItem("email"));
     }
   }, [navigate]);
 
-  console.log("currentUser", currentUser);
+  // Connect socket
   useEffect(() => {
     if (!socket) {
-      connectSocket("653385a8a95841abc1b58eee"); // login thành công lấy id của user thay vào
+      connectSocket(userId);
     }
-  }, [currentUser, socket]);
+  }, [userId]);
+  // Gửi sự kiện lấy tin nhắn
+  useEffect(() => {
+    socket.emit(
+      "get_direct_conversations",
+      {
+        user_id: userId,
+      },
+      (response) => {
+        setContacts(response);
+      }
+    );
+  }, [userId]);
 
   // useEffect(async () => {
   //   if (currentUser) {
@@ -69,7 +82,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: rgb(229, 239, 255);;
+  background-color: rgb(229, 239, 255);
   .container {
     height: 85vh;
     width: 85vw;
