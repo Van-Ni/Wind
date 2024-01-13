@@ -47,6 +47,8 @@ export default function ChatContainer({ currentChat }) {
     setMessages(msgs);
   };
 
+  console.log(currentChat);
+
   useEffect(() => {
     if (socket.current) {
       socket.current.on("new_message", (msg) => {
@@ -68,19 +70,19 @@ export default function ChatContainer({ currentChat }) {
       <div className="chat-header">
         <div className="user-details">
           <div className="avatar">
-            <img
-              src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
+            {/* <img
+              src={currentChat.participants[0].avatar.url}
               alt=""
-            />
+            /> */}
           </div>
           <div className="username">
-            <h3>{currentChat.username}</h3>
+            <h3>{`${currentChat.participants[0].lastName} ${currentChat.participants[0].firstName}`}</h3>
           </div>
         </div>
         {/* <Logout /> */}
         <button
           onClick={() => navigate("/friend")}
-          className="btn btn-xs btn-primary mb-2"
+          className="btn btn-xs btn-primary"
         >
           Back
         </button>
@@ -121,7 +123,6 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
     border-bottom: 1px solid #ccc;
     .user-details {
       display: flex;

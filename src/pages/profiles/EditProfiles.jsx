@@ -130,15 +130,15 @@ const UpdateInformationForm = () => {
     <div className="update-information-form container">
       <section className="mx-auto my-5" style={{ maxWidth: "23rem" }}>
         <div className="card testimonial-card mt-2 mb-3">
-          <div className="tag-title">
+          {/* <div className="tag-title">
             <label>Update Infomation</label>
+          </div> */}
+          <div className="card-up aqua-gradient">
             <i
               onClick={() => navigate("/friend")}
-              className="fa-solid fa-xmark"
+              className="icon-close fa-solid fa-xmark"
             ></i>
           </div>
-          <hr style={{ margin: "0" }} />
-          <div className="card-up aqua-gradient"></div>
           <div className="avatar mx-auto white">
             {/* <img
               src='https://scontent.fdad1-3.fna.fbcdn.net/v/t1.6435-9/190108336_322648402555040_2100790391455013605_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=be3454&_nc_ohc=vCgm_rTClrwAX9Zbu8N&_nc_ht=scontent.fdad1-3.fna&oh=00_AfB4tQHN4NndVwSFvy0IUfP23U0swH6HvVlB3s4YCqVJrg&oe=657A4880'
@@ -150,7 +150,7 @@ const UpdateInformationForm = () => {
               style={{
                 width: "100%",
                 height: "115px",
-                "object-fit": "cover",
+                objectFit: "fill",
               }}
               id="selectedAvatar"
               src={userData.avatar}
@@ -164,7 +164,7 @@ const UpdateInformationForm = () => {
               style={{
                 position: "absolute",
                 right: "30%",
-                top: "28%",
+                top: "23%",
                 padding: "0",
               }}
             >
@@ -209,9 +209,9 @@ const UpdateInformationForm = () => {
 
             <hr className="edit-hr" />
             <div>
-              <h3 className="content_personal personal-info-title">
+              <h4 className="content_personal personal-info-title">
                 Personal Information
-              </h3>
+              </h4>
             </div>
             <div className="form-group">
               <label className="dob">Gender</label>
@@ -226,7 +226,7 @@ const UpdateInformationForm = () => {
             </div>
 
             <div className="form-group">
-              <label className="dob">Date of birth</label>
+              <label className="dob">Birthday</label>
               <input
                 type="date"
                 id="dob"

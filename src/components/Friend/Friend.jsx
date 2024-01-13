@@ -14,14 +14,12 @@ import DefaultAvt from "../../assets/img/default.jpg";
 import { connectSocket, socket } from "../../socket";
 import Logout from "../Logout";
 import { getFriendsRoute } from "../../utils/APIRoutes";
+import ProfileHeader from "./ProfileHeader";
 
 function Friend() {
   const navigate = useNavigate();
 
   const [friendrequest, setFriendrequest] = useState([]);
-  const [firstName2, setFirstName2] = useState("");
-  const [lastName2, setLastName2] = useState("");
-  const [inputValue, setInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
   const [showDropdown, setShowDropdown] = useState(false);
@@ -75,23 +73,6 @@ function Friend() {
       });
     }
   }, [socket]);
-  // Gửi sự kiện yêu cầu kết bạn
-  // const testYeuCauKetBan = useCallback(() => {
-  //   socket.emit("friend_request", {
-  //     to: "65508d6a73ad8e1036a91091", // Id của tài khoản quocan@gmail.com
-  //     from: userId
-  //   }, (response) => {
-  //     console.log(response.status)
-  //   })
-  // }, [userId])
-  // // Nhận sự kiện request_sent và trả về message
-  // useEffect(() => {
-  //   if (socket) {
-  //     socket.on("request_sent", (response) => {
-  //       console.log(response);
-  //     });
-  //   }
-  // }, [socket]);
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
@@ -124,96 +105,14 @@ function Friend() {
             console.log("Không có dữ liệu hoặc dữ liệu không đúng định dạng");
           }
         });
-      fetch("https://wind-be.onrender.com/user/get-me", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "success") {
-            const { firstName, lastName } = data.data;
-
-            // Update state or do other actions with the data
-            setFirstName2(firstName);
-            setLastName2(lastName);
-          } else {
-            console.log("Không có dữ liệu hoặc dữ liệu không đúng định dạng");
-          }
-        })
-        .catch((error) => console.log(error));
     }
   }, []);
-
-  const { firstName, lastName, _id } = displayedFRRS[0]?.sender || {};
 
   return (
     <>
       <div className="container">
         <div id="content" className="content p-0">
-          <div className="profile-header">
-            <div className="profile-header-cover"></div>
-            <div className="profile-header-content">
-              <div className="profile-header-img mb-4">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                  className="mb-4"
-                  alt=""
-                />
-              </div>
-
-              <div className="profile-header-info">
-                <h4 className="m-t-sm">{`${firstName2} ${lastName2}`}</h4>
-                <div style={{display:"flex"}}>
-                  <a href="/profiles" className="btn btn-xs btn-primary" style={{"marginRight": "6px"}}>
-                    Details
-                  </a>
-                  <a href="/" className="btn btn-xs btn-primary" style={{"marginRight": "6px"}}>
-                    Messages
-                  </a>
-                  <Logout />
-                </div>
-              </div>
-            </div>
-
-            <ul className="profile-header-tab nav nav-tabs">
-              <li className="nav-item">
-                <a href="#profile-post" className="nav-link" data-toggle="tab">
-                  POSTS
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#profile-about" className="nav-link" data-toggle="tab">
-                  ABOUT
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="friend/suggest" className="nav-link" data-toggle="tab">
-                  SUGGEST
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="/friend/request"
-                  className="nav-link"
-                  data-toggle="tab"
-                >
-                  FRIEND REQUEST
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="/friend"
-                  className="nav-link active show"
-                  data-toggle="tab"
-                >
-                  FRIENDS
-                </a>
-              </li>
-            </ul>
-          </div>
+          <ProfileHeader />
 
           <div className="profile-container">
             <div className="row row-space-20">
@@ -224,7 +123,7 @@ function Friend() {
                     id="profile-friends"
                   >
                     <div className="m-b-10">
-                      <b>Friend List </b>
+                      <h5>Friend List </h5>
                     </div>
 
                     <ul className="friend-list clearfix">
@@ -232,7 +131,6 @@ function Friend() {
                         // Kiểm tra xem request và sender có tồn tại không
                         if (request) {
                           const { firstName, lastName, _id } = request;
-
                           return (
                             <li key={_id}>
                               <a href="#">
@@ -243,10 +141,12 @@ function Friend() {
                                   />
                                 </div>
                                 <div className="friend-info">
-                                  <h4>{`${firstName} ${lastName}`}</h4>
+                                  <h4
+                                    style={{ margin: "0" }}
+                                  >{`${firstName} ${lastName}`}</h4>
                                   <button
                                     onClick={() => startChatting(_id)}
-                                    className="btn btn-xs btn-primary mb-2"
+                                    className="btn btn-xs btn-primary"
                                   >
                                     Chat
                                   </button>

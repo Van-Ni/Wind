@@ -18,9 +18,10 @@ body {
   margin-left: 20px; 
 } */
 
-.update-information-form h4, .content_personal {
+.update-information-form h4,
+.content_personal {
   font-size: 16px;
-  margin-left: 20px; 
+  margin-left: 20px;
 }
 
 .update-information-form .form-control {
@@ -39,12 +40,13 @@ body {
 .update-information-form .testimonial-card .card-up {
   height: 120px;
   overflow: hidden;
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
 }
 
 .update-information-form .aqua-gradient {
-  background: linear-gradient(40deg, #2096ff, #523ad9) !important;
+  background: url(https://bootdey.com/img/Content/bg1.jpg) center no-repeat;
+  background-size: 100% auto;
 }
 
 .update-information-form .testimonial-card .avatar {
@@ -91,4 +93,18 @@ body {
 .update-information-form .btn {
   margin-right: 10px;
   margin-top: 10px;
+}
+
+.icon-close {
+  color: #fff !important;
+  position: absolute;
+  right: 0;
+  font-size: 24px !important;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 24px;
+}
+
+.icon-close:hover {
+  background-color: rgba(255, 99, 71, 0.2);
 }
