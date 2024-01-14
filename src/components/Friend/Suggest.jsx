@@ -148,7 +148,13 @@ function Suggest() {
                                 <div className="friend-info">
                                   <h4>{`${firstName} ${lastName}`}</h4>
                                   <button
-                                    onClick={() => sendRequest(_id)}
+                                    onClick={() => {
+                                      // Handle the event (send request)
+                                      sendRequest(_id);
+                                  
+                                      // Reload the page
+                                      window.location.reload();
+                                    }}
                                     className="btn btn-xs btn-primary mb-2"
                                   >
                                     Add Friend

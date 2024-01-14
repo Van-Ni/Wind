@@ -129,6 +129,18 @@ function Friend() {
     setAvatar(sessionStorage.getItem("avatar"));
   }, [userId]);
 
+  const currentURL = window.location.pathname;
+
+// Find the navigation links
+const navLinks = document.querySelectorAll('.nav-item a');
+
+// Loop through the links and add the active class to the matching link
+navLinks.forEach(link => {
+  if (link.getAttribute('href') === currentURL) {
+    link.classList.add('active', 'show');
+  }
+});
+
   return (
     <>
       <div className="profile-header">
@@ -167,7 +179,7 @@ function Friend() {
           </li>
           <li className="nav-item">
             <a href="/profiles" className="nav-link" data-toggle="tab">
-              ABOUT
+              PROFILE
             </a>
           </li>
           <li className="nav-item">
@@ -183,7 +195,7 @@ function Friend() {
           <li className="nav-item">
             <a
               href="/friend"
-              className="nav-link active show"
+              className="nav-link  "
               data-toggle="tab"
             >
               FRIENDS

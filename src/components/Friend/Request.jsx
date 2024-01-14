@@ -142,9 +142,14 @@ function Request() {
                                 <div className="friend-info">
                                   <h4>{`${firstName} ${lastName}`}</h4>
                                   <button
-                                    onClick={() =>
-                                      acceptRequest(_id, requestId)
-                                    }
+                                   onClick={() => {
+                                    // Handle the event (send request)
+                                    acceptRequest(_id, requestId);
+                                
+                                    // Reload the page
+                                    window.location.reload();
+                                  }}
+                                   
                                     id="acceptButton"
                                     className="btn btn-xs btn-primary mb-2"
                                   >
