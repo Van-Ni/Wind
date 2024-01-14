@@ -70,7 +70,7 @@ export default function Login() {
               <span className="form-message"></span>
             </div>
             <input type="submit" value="Log in" className="login form-submit" />
-            <LoginSocialGoogle
+            {/* <LoginSocialGoogle
               scope={'email'}
               client_id={REACT_APP_GG_APP_ID || ''}
               onResolve={({ provider, data }) => {
@@ -82,7 +82,7 @@ export default function Login() {
               }}
             >
               <GoogleLoginButton style={{ fontSize: '16px', width: '345px', margin: '8px 0px 0px 0px' }} />
-            </LoginSocialGoogle>
+            </LoginSocialGoogle> */}
             <a href="#">Forgot Password ?</a>
             <hr />
             <Link className="create-account" to="/register">Create New Account</Link>

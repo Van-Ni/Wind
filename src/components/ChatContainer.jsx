@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
@@ -13,6 +13,26 @@ export default function ChatContainer({ currentChat }) {
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
   const navigate = useNavigate();
 
+  const fetchMessages = useCallback(() => {
+    socket.emit(
+      "get_messages",
+      {
+        conversation_id: currentChat._id,
+      },
+      (response) => {
+        const chatHistory = [];
+        response.map((msg) => {
+          if (msg.from === userId) {
+            chatHistory.push({ fromSelf: true, message: msg.text });
+          } else {
+            chatHistory.push({ fromSelf: false, message: msg.text });
+          }
+        });
+        setMessages(chatHistory);
+      }
+    );
+  }, []);
+  
   useEffect(() => {
     socket.emit(
       "get_messages",
@@ -38,7 +58,10 @@ export default function ChatContainer({ currentChat }) {
       message: msg,
       conversation_id: currentChat._id,
       from: userId,
-      to: currentChat.participants[0]._id,
+      to:
+        currentChat.participants[0]._id !== userId
+          ? currentChat.participants[0]._id
+          : currentChat.participants[1]._id,
       type: "Text",
     });
 
@@ -47,14 +70,10 @@ export default function ChatContainer({ currentChat }) {
     setMessages(msgs);
   };
 
-  console.log(currentChat);
-
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on("new_message", (msg) => {
-        setArrivalMessage({ fromSelf: false, message: msg });
-      });
-    }
+    socket.on("new_message", (response) => {
+      fetchMessages();
+    });
   }, []);
 
   useEffect(() => {
@@ -71,12 +90,20 @@ export default function ChatContainer({ currentChat }) {
         <div className="user-details">
           <div className="avatar">
             {/* <img
-              src={currentChat.participants[0].avatar.url}
+              src={currentChat.participants[0].avatar.url || "https://bootdey.com/img/Content/avatar/avatar2.png"}
               alt=""
             /> */}
           </div>
           <div className="username">
-            <h3>{`${currentChat.participants[0].lastName} ${currentChat.participants[0].firstName}`}</h3>
+            <h3>{`${
+              currentChat.participants[0]._id !== userId
+                ? currentChat.participants[0].lastName
+                : currentChat.participants[1].lastName
+            } ${
+              currentChat.participants[0]._id !== userId
+                ? currentChat.participants[0].firstName
+                : currentChat.participants[1].firstName
+            }`}</h3>
           </div>
         </div>
         {/* <Logout /> */}

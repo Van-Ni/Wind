@@ -1,18 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import IconRq from "../../assets/img/frreqindex.jpg";
-import IconAll from "../../assets/img/All-icon.jpg";
-import Iconsugesst from "../../assets/img/suggesticon.jpg";
-import Homebutton from "../../assets/img/home.jpg";
-import FriendIcon from "../../assets/img/userbutton.jpg";
-import MsgIcon from "../../assets/img/msg.jpg";
-import NofiIcon from "../../assets/img/nofi.jpg";
-import MenuIcon from "../../assets/img/menu.jpg";
-import AvtIcon from "../../assets/img/avt.jpg";
-import DefaultAvt from "../../assets/img/default.jpg";
 import { connectSocket, socket } from "../../socket";
-import Logout from "../Logout";
 import { getFriendsRoute } from "../../utils/APIRoutes";
 import ProfileHeader from "./ProfileHeader";
 
@@ -24,15 +13,17 @@ function Friend() {
   const productsPerPage = 8;
   const [showDropdown, setShowDropdown] = useState(false);
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
+  const imageUrls = [
+    "https://bootdey.com/img/Content/avatar/avatar2.png",
+    "https://bootdey.com/img/Content/avatar/avatar3.png",
+    "https://bootdey.com/img/Content/avatar/avatar4.png",
+    "https://bootdey.com/img/Content/avatar/avatar5.png",
+    "https://bootdey.com/img/Content/avatar/avatar6.png",
+    "https://bootdey.com/img/Content/avatar/avatar7.png",
+    "https://bootdey.com/img/Content/avatar/avatar8.png",
+    "https://bootdey.com/img/Content/avatar/avatar1.png",
+  ];
 
-  const handleDropdownToggle = () => {
-    setShowDropdown(!showDropdown);
-  };
-
-  const handleOptionClick = () => {
-    sessionStorage.removeItem("token");
-    navigate("/login");
-  };
   const displayedFRRS = useMemo(() => {
     // Kiểm tra nếu friendrequest không phải là một mảng
     if (!Array.isArray(friendrequest)) {
@@ -44,7 +35,6 @@ function Friend() {
     const endIndex = startIndex + productsPerPage;
     return friendrequest.slice(startIndex, endIndex);
   }, [friendrequest]);
-  // console.log("a"+displayedFRRS)
 
   // Connect socket
   useEffect(() => {
@@ -65,6 +55,7 @@ function Friend() {
       }
     );
   });
+
   // Nhận sự kiện start_chat
   useEffect(() => {
     if (socket) {
@@ -81,6 +72,7 @@ function Friend() {
       });
     }
   }, [sessionStorage.getItem("token")]);
+
   useEffect(() => {
     const token = sessionStorage.getItem("token");
 
@@ -123,22 +115,27 @@ function Friend() {
                     id="profile-friends"
                   >
                     <div className="m-b-10">
-                      <h5>Friend List </h5>
+                      <b>Friend List </b>
                     </div>
 
                     <ul className="friend-list clearfix">
                       {displayedFRRS.map((request, index) => {
                         // Kiểm tra xem request và sender có tồn tại không
                         if (request) {
-                          const { firstName, lastName, _id } = request;
+                          const { firstName, lastName, _id, avatar } = request;
+                          const randomImageUrl =
+                            imageUrls[
+                              Math.floor(Math.random() * imageUrls.length)
+                            ];
+                          let urlImg;
+                          if (avatar) {
+                            urlImg = avatar.url;
+                          }
                           return (
                             <li key={_id}>
                               <a href="#">
                                 <div className="friend-img">
-                                  <img
-                                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                    alt=""
-                                  />
+                                  <img src={urlImg || randomImageUrl} alt="" />
                                 </div>
                                 <div className="friend-info">
                                   <h4
@@ -163,24 +160,6 @@ function Friend() {
                   </div>
                 </div>
               </div>
-
-              {/* <div className="col-md-4 hidden-xs hidden-sm">
-                <ul className="profile-info-list">
-                
-                    <li className="title">FRIEND LIST (9)</li>
-                    <li className="img-list">
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" /></a>
-                        <a href="#" className="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
-                    </li>
-                </ul>
-            </div> */}
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ export default function Contacts({ contacts, changeChat }) {
   const [userEmail, setUserEmail] = useState(undefined);
   const location = useLocation();
   const { state } = location;
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
 
   useEffect(() => {
     if (state && state.id) {
@@ -45,6 +46,7 @@ export default function Contacts({ contacts, changeChat }) {
     setCurrentSelected(index);
     changeChat(contact);
   };
+
   return (
     <>
       {currentUserImage && currentUserImage && (
@@ -55,6 +57,25 @@ export default function Contacts({ contacts, changeChat }) {
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
+              let avatarUrl;
+              let firstName;
+              let lastName;
+
+              if (contact.participants[0]._id == userId) {
+                firstName = contact.participants[1].firstName;
+                lastName = contact.participants[1].lastName;
+                const avatar = contact.participants[1].avatar;
+                if (avatar) {
+                  avatarUrl = avatar.url;
+                }
+              } else {
+                firstName = contact.participants[0].firstName;
+                lastName = contact.participants[0].lastName;
+                const avatar = contact.participants[0].avatar;
+                if (avatar) {
+                  avatarUrl = avatar.url;
+                }
+              }
               return (
                 <div
                   key={contact._id}
@@ -63,14 +84,17 @@ export default function Contacts({ contacts, changeChat }) {
                   }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
-                  {/* <div className="avatar">
+                  <div className="avatar">
                     <img
-                      src={contact.participants[0].avatar.url}
+                      src={
+                        avatarUrl ||
+                        "https://bootdey.com/img/Content/avatar/avatar2.png"
+                      }
                       alt=""
                     />
-                  </div> */}
+                  </div>
                   <div className="username">
-                    <h3>{`${contact.participants[0].lastName} ${contact.participants[0].firstName}`}</h3>
+                    <h3>{`${lastName} ${firstName}`}</h3>
                   </div>
                 </div>
               );
@@ -114,7 +138,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    // overflow: auto;
+    overflow: auto;
     gap: 0.8rem;
     &::-webkit-scrollbar {
       width: 0.2rem;
@@ -128,15 +152,20 @@ const Container = styled.div`
       background-color: #fff;
       min-height: 55px;
       cursor: pointer;
-      width: 100%;
+      width: 90%;
       border-radius: 0.2rem;
-      padding: 20px;
+      padding: 4px;
       display: flex;
       gap: 1rem;
       align-items: center;
       transition: 0.5s ease-in-out;
       .avatar {
+        height: 40px;
+        width: 40px;
         img {
+          width: 100%;
+          height: 100%;
+          border-radius: 24px;
         }
       }
       .username {
@@ -156,14 +185,17 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
     .avatar {
+      width: 50px;
+      height: 50px;
       img {
+        border: 2px solid #ccc;
+        border-radius: 24px;
+        height: 100%;
+        width: 100%;
+        max-inline-size: 100%;
         object-fit: fill;
-        max-width: 100%;
-        border-radius: 62px;
-        width: 45px;
-        height: 45px;
       }
     }
     .username {
