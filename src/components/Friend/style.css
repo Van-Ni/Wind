@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-  #addfriend-container .container-card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+#addfriend-container .container-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
- 
 /* Các quy tắc CSS khác giống như trước */
 #addfriend-container .image {
   width: 100%;
@@ -15,7 +14,7 @@
 #addfriend-container .text-name {
   text-align: center;
 }
- 
+
 #addfriend-container .button {
   text-align: center;
 }
@@ -34,16 +33,15 @@
   width: 1650px;
   height: 80px;
   flex-shrink: 0;
-  background: #FDFDFD;
+  background: #fdfdfd;
 }
-
 
 #addfriend-container .left-sidebar {
   flex-basis: 250px;
 
   height: 996px;
   flex-shrink: 0;
-  background: #FDFDFD;
+  background: #fdfdfd;
   padding: 10px;
 }
 
@@ -72,7 +70,7 @@
   width: 1600px !important;
   height: 900px;
   flex-shrink: 0;
-  background: #E8E8E8;
+  background: #e8e8e8;
   margin-left: 0px;
   margin-top: 0px;
   /* Khoảng cách giữa content và top-menu */
@@ -84,13 +82,11 @@
 }
 
 #addfriend-container .card {
-  
-   
-  align-items: center; 
+  align-items: center;
   width: 230px;
   height: 336px;
   flex-shrink: 0;
-  background-color: #FDFDFD;
+  background-color: #fdfdfd;
   border-radius: 10px;
 }
 
@@ -109,25 +105,23 @@
   height: 75px;
   flex-shrink: 0;
   margin-left: 25px;
-
 }
 
 #addfriend-container .button button {
   width: 100%;
   height: 50%;
   border-radius: 10px;
-  border-color: #E8E8E8;
+  border-color: #e8e8e8;
   margin-top: 5px;
 }
 
 #addfriend-container .button button:nth-child(1) {
-  background: #587CFB;
+  background: #587cfb;
   color: white;
-
 }
 
 #addfriend-container .button button:nth-child(2) {
-  background: #E8E8E8;
+  background: #e8e8e8;
 }
 
 #addfriend-container .text-name {
@@ -138,7 +132,6 @@
   font-style: normal;
   font-weight: 550;
   line-height: normal;
-
 }
 
 #addfriend-container .text-frrq {
@@ -173,7 +166,7 @@
 /* Media queries */
 @media (max-width: 1200px) {
   #addfriend-container.container {
-    justify-content: flex-start ;
+    justify-content: flex-start;
   }
 
   #addfriend-container .left-sidebar {
@@ -188,7 +181,6 @@
 
 #addfriend-container .logo-icon {
   margin: 5px !important;
-  ;
   justify-content: center;
   align-items: center;
   display: inline-flex;
@@ -197,13 +189,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  background: #587CFB;
+  background: #587cfb;
 }
 
 #addfriend-container .text-icon {
   width: 31px;
   height: 44px;
-  color: #FFF;
+  color: #fff;
   font-family: Jomhuria;
   font-size: 20px;
   font-style: normal;
@@ -216,18 +208,15 @@
 #addfriend-container .text-h2 {
   margin-top: 8px;
   text-align: center;
-
 }
 
 #addfriend-container .search-bar {
-
   display: inline-flex;
   padding: 11px 60px 11px 12px;
   align-items: flex-end;
   gap: 15px;
   border-radius: 43px;
-  background: #E8E8E8;
-
+  background: #e8e8e8;
 }
 
 #addfriend-container .button-container {
@@ -259,9 +248,11 @@
   text-overflow: ellipsis;
 }
 #addfriend-container .ui.link.card {
-  flex-basis: calc(33.33% - 10px);   /* Độ rộng của mỗi thẻ (33.33% của không gian cha với khoảng cách là 10px) */
+  flex-basis: calc(
+    33.33% - 10px
+  ); /* Độ rộng của mỗi thẻ (33.33% của không gian cha với khoảng cách là 10px) */
   margin-bottom: 20px;
-  box-sizing: border-box;  /* Đảm bảo rằng padding và border không làm tăng kích thước thực tế */
+  box-sizing: border-box; /* Đảm bảo rằng padding và border không làm tăng kích thước thực tế */
 }
 #addfriend-container.ui.link.cards .card {
   width: 100%;
@@ -271,11 +262,11 @@
 #addfriend-container .ui {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
-#addfriend-container .four-wide-column{
-  display: flex;  /* Sử dụng flexbox để hiển thị các phần tử con ngang nhau */
-  flex-wrap: wrap;  /* Cho phép các phần tử con tự xuống dòng khi không đủ không gian */
+#addfriend-container .four-wide-column {
+  display: flex; /* Sử dụng flexbox để hiển thị các phần tử con ngang nhau */
+  flex-wrap: wrap; /* Cho phép các phần tử con tự xuống dòng khi không đủ không gian */
   justify-content: center;
   flex: 0 1 calc(25% - 10px); /* Giới hạn mỗi phần tử trên mỗi dòng là 4 */
   margin-bottom: 10px; /* Khoảng cách giữa các phần tử */
@@ -288,13 +279,13 @@
 
   #addfriend-container .card {
     width: 100%;
-    align-items: center; 
+    align-items: center;
   }
 }
 
-body{
+body {
   background: #eaeaea;
-  margin-top:20px;
+  margin-top: 20px;
 }
 .profile-info-list {
   padding: 0;
@@ -382,7 +373,11 @@ body{
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0.85) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0,
+    rgba(0, 0, 0, 0.85) 100%
+  );
 }
 .profile-header .profile-header-content,
 .profile-header .profile-header-tab,
@@ -450,52 +445,52 @@ body .fc-widget-header a {
   font-weight: 500;
   margin-bottom: 0.3125rem;
   margin-top: 2%;
-    font-size: large;
+  font-size: large;
 }
 .profile-container {
   padding: 1.5625rem 0;
 }
 @media (max-width: 967px) {
   .profile-header-img {
-      width: 5.625rem;
-      height: 5.625rem;
-      margin: 0;
+    width: 5.625rem;
+    height: 5.625rem;
+    margin: 0;
   }
   .profile-header-info {
-      margin-left: 6.5625rem;
-      padding-bottom: 0.9375rem;
+    margin-left: 6.5625rem;
+    padding-bottom: 0.9375rem;
   }
   .profile-header .profile-header-tab {
-      padding-left: 0;
+    padding-left: 0;
   }
 }
 @media (max-width: 767px) {
   .profile-header .profile-header-cover {
-      background-position: top;
+    background-position: top;
   }
   .profile-header-img {
-      width: 3.75rem;
-      height: 3.75rem;
-      margin: 0;
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: 0;
   }
   .profile-header-info {
-      margin-left: 4.6875rem;
-      padding-bottom: 0.9375rem;
+    margin-left: 4.6875rem;
+    padding-bottom: 0.9375rem;
   }
   .profile-header-info h4 {
-      margin: 0 0 0.3125rem;
+    margin: 0 0 0.3125rem;
   }
   .profile-header .profile-header-tab {
-      white-space: nowrap;
-      overflow: scroll;
-      padding: 0;
+    white-space: nowrap;
+    overflow: scroll;
+    padding: 0;
   }
   .profile-container {
-      padding: 0.9375rem 0.9375rem 3.6875rem;
+    padding: 0.9375rem 0.9375rem 3.6875rem;
   }
   .friend-list > li {
-      float: none;
-      width: auto;
+    float: none;
+    width: auto;
   }
 }
 .profile-info-list {
@@ -541,6 +536,8 @@ body .fc-widget-header a {
 .friend-list .friend-img img,
 .profile-header-img img {
   max-width: 100%;
+  height: 100%;
+  width: 100%;
 }
 .table.table-profile th {
   border: none;
@@ -593,6 +590,7 @@ body .fc-widget-header a {
   background: #efeff4;
   border-radius: 24px;
 }
+
 .friend-list .friend-info {
   margin-left: 3.625rem;
   display: flex;

@@ -45,35 +45,6 @@ function Friend() {
       connectSocket(userId); // login thành công lấy id của user thay vào
     }
   }, [userId]);
-  // Nhắn tin
-  const startChatting = useCallback((id) => {
-    socket.emit(
-      "start_conversation",
-      {
-        to: id,
-        from: userId,
-      },
-      (response) => {
-        console.log(response.status);
-      }
-    );
-  });
-  // Nhận sự kiện start_chat
-  useEffect(() => {
-    if (socket) {
-      socket.on("start_chat", (response) => {
-        navigate("/", { state: { id: response.participants[0]._id } });
-      });
-    }
-  }, [socket]);
-
-  useEffect(() => {
-    if (!sessionStorage.getItem("token")) {
-      setTimeout(() => {
-        navigate("/login");
-      });
-    }
-  }, [sessionStorage.getItem("token")]);
   useEffect(() => {
     const token = sessionStorage.getItem("token");
 
@@ -111,10 +82,12 @@ function Friend() {
             const { firstName, lastName, avatar } = data.data;
             sessionStorage.setItem("firstName", firstName);
             sessionStorage.setItem("lastName", lastName);
-            sessionStorage.setItem("avatar", avatar.url);
+            if (avatar) {
+              sessionStorage.setItem("avatar", avatar.url);
+              setAvatar(sessionStorage.getItem("avatar"));
+            }
             setFirstName(sessionStorage.getItem("firstName"));
             setLastName(sessionStorage.getItem("lastName"));
-            setAvatar(sessionStorage.getItem("avatar"));
           } else {
             console.log("Không có dữ liệu hoặc dữ liệu không đúng định dạng");
           }
@@ -131,15 +104,15 @@ function Friend() {
 
   const currentURL = window.location.pathname;
 
-// Find the navigation links
-const navLinks = document.querySelectorAll('.nav-item a');
+  // Find the navigation links
+  const navLinks = document.querySelectorAll(".nav-item a");
 
-// Loop through the links and add the active class to the matching link
-navLinks.forEach(link => {
-  if (link.getAttribute('href') === currentURL) {
-    link.classList.add('active', 'show');
-  }
-});
+  // Loop through the links and add the active class to the matching link
+  navLinks.forEach((link) => {
+    if (link.getAttribute("href") === currentURL) {
+      link.classList.add("active", "show");
+    }
+  });
 
   return (
     <>
@@ -178,24 +151,52 @@ navLinks.forEach(link => {
             </a>
           </li>
           <li className="nav-item">
-            <a href="/profiles" className="nav-link" data-toggle="tab">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/profiles");
+              }}
+              href="/profiles"
+              className="nav-link"
+              data-toggle="tab"
+            >
               PROFILE
             </a>
           </li>
           <li className="nav-item">
-            <a href="/friend/suggest" className="nav-link" data-toggle="tab">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/friend/suggest");
+              }}
+              href="/friend/suggest"
+              className="nav-link"
+              data-toggle="tab"
+            >
               SUGGEST
             </a>
           </li>
           <li className="nav-item">
-            <a href="/friend/request" className="nav-link" data-toggle="tab">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/friend/request");
+              }}
+              href="/friend/request"
+              className="nav-link"
+              data-toggle="tab"
+            >
               FRIEND REQUEST
             </a>
           </li>
           <li className="nav-item">
             <a
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/friend");
+              }}
               href="/friend"
-              className="nav-link  "
+              className="nav-link"
               data-toggle="tab"
             >
               FRIENDS

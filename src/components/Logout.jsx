@@ -8,6 +8,7 @@ export default function Logout() {
   const navigate = useNavigate();
   const handleLogout = () => {
     sessionStorage.removeItem("token");
+    sessionStorage.clear();
     window.location.reload()
   };
   return (

@@ -12,7 +12,7 @@ const UpdateInformationForm = () => {
   const [gender, setGender] = useState("");
   const [userData, setUserData] = useState({
     fullname: "",
-    avatar: "",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar2.png",
     phone: "",
     gender: "",
     dateOfBirth: "",
@@ -61,7 +61,7 @@ const UpdateInformationForm = () => {
         phone: "0371233559",
         gender: "Male",
         dateOfBirth: "20/10/2000",
-        avatar: data.data.avatar.url,
+        avatar: data.data.avatar.url || "https://bootdey.com/img/Content/avatar/avatar2.png",
       };
       // console.log(data)
 
@@ -153,7 +153,7 @@ const UpdateInformationForm = () => {
                 objectFit: "fill",
               }}
               id="selectedAvatar"
-              src={userData.avatar}
+              src={userData.avatar || "https://bootdey.com/img/Content/avatar/avatar2.png"}
               className="rounded-circle img-fluid"
               alt="example placeholder"
             />

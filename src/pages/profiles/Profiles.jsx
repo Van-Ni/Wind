@@ -87,7 +87,7 @@ const Profiles = () => {
                 height: "115px",
                 objectFit: "fill",
               }}
-              src={userData.avatar}
+              src={userData.avatar || "https://bootdey.com/img/Content/avatar/avatar2.png"}
               className="rounded-circle img-fluid"
               alt="avatar"
             />
