@@ -13,26 +13,6 @@ export default function ChatContainer({ currentChat }) {
   const [userId, setUserId] = useState(sessionStorage.getItem("userId"));
   const navigate = useNavigate();
 
-  const fetchMessages = useCallback(() => {
-    socket.emit(
-      "get_messages",
-      {
-        conversation_id: currentChat._id,
-      },
-      (response) => {
-        const chatHistory = [];
-        response.map((msg) => {
-          if (msg.from === userId) {
-            chatHistory.push({ fromSelf: true, message: msg.text });
-          } else {
-            chatHistory.push({ fromSelf: false, message: msg.text });
-          }
-        });
-        setMessages(chatHistory);
-      }
-    );
-  }, []);
-  
   useEffect(() => {
     socket.emit(
       "get_messages",
@@ -72,7 +52,8 @@ export default function ChatContainer({ currentChat }) {
 
   useEffect(() => {
     socket.on("new_message", (response) => {
-      fetchMessages();
+      if (userId === response.message.to)
+        setArrivalMessage({ fromSelf: false, message: response.message.text });
     });
   }, []);
 

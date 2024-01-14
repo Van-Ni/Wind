@@ -61,17 +61,19 @@ export default function Contacts({ contacts, changeChat }) {
               let firstName;
               let lastName;
 
-              if (contact.participants[0]._id == userId) {
-                firstName = contact.participants[1].firstName;
-                lastName = contact.participants[1].lastName;
-                const avatar = contact.participants[1].avatar;
+              console.log(contact)
+
+              if (contact.participants[0]._id != userId) {
+                firstName = contact.participants[0].firstName;
+                lastName = contact.participants[0].lastName;
+                const avatar = contact.participants[0].avatar;
                 if (avatar) {
                   avatarUrl = avatar.url;
                 }
               } else {
-                firstName = contact.participants[0].firstName;
-                lastName = contact.participants[0].lastName;
-                const avatar = contact.participants[0].avatar;
+                firstName = contact.participants[1].firstName;
+                lastName = contact.participants[1].lastName;
+                const avatar = contact.participants[1].avatar;
                 if (avatar) {
                   avatarUrl = avatar.url;
                 }
