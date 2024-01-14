@@ -61,7 +61,7 @@ export default function Contacts({ contacts, changeChat }) {
               let firstName;
               let lastName;
 
-              console.log(contact)
+              // console.log(contact)
 
               if (contact.participants[0]._id != userId) {
                 firstName = contact.participants[0].firstName;
